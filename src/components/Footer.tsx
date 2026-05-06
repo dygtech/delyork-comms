@@ -1,0 +1,65 @@
+import { ArrowUpRight } from "lucide-react";
+
+const Footer = () => {
+  return (
+    <footer className="bg-background border-t border-border/30 py-16">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Newsletter */}
+          <div>
+            <h3 className="font-heading text-xl font-bold mb-6">Subscribe Our Newsletter!</h3>
+            <div className="flex items-center bg-card rounded-full overflow-hidden border border-border/30">
+              <input
+                type="email"
+                placeholder="Enter e-mail"
+                className="flex-1 bg-transparent px-5 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none font-body"
+              />
+              <button className="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-1 hover:bg-primary/80 transition-colors flex-shrink-0">
+                <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
+              </button>
+            </div>
+            <p className="text-foreground/40 text-xs mt-8">Copyright© 2026 Blenco</p>
+            <div className="flex gap-4 mt-4">
+              {["f", "𝕏", "📷", "P"].map((icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="text-foreground/40 hover:text-primary transition-colors text-sm"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-heading text-xl font-bold mb-6">Quick Links</h3>
+            <ul className="space-y-3">
+              {["How It Works", "Get To Know Us", "Pricing Packages", "Contact Us"].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-heading text-xl font-bold mb-6">Contact</h3>
+            <p className="text-foreground/60 text-sm leading-relaxed font-body">
+              1487 Rocky Horse Carre 1487Rocky<br />
+              Arlington, TX 16819 United
+            </p>
+            <p className="font-heading text-2xl font-bold mt-4">1800 6565 222</p>
+            <p className="text-foreground/60 text-sm mt-2 font-body">info@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
