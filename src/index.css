@@ -147,3 +147,12 @@
 .reveal-up {
   animation: reveal-up 0.7s ease-out forwards;
 }
+
+.text-outline {
+  -webkit-text-stroke: 1px hsla(var(--foreground), 0.2);
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
