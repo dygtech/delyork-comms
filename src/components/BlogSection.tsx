@@ -26,7 +26,7 @@ const BlogSection = () => {
           </div>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold">
             Learn From Journal Insight{" "}
-            <span className="text-primary italic">Of Blenco</span>
+            <span className="text-primary italic">Of DYC</span>
           </h2>
           <p className="text-foreground/60 text-sm mt-4 max-w-xl mx-auto">
             At our Creative Digital Agency, we bring your ideas life beach

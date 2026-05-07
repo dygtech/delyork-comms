@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -10,41 +11,85 @@ const projects = [
   { img: project3, title: "Creative Marketing", date: "11 Sep, 2025" },
 ];
 
-const PortfolioSection = () => {
+const ProjectCard = ({ 
+  project, 
+  index, 
+  progress, 
+  range, 
+  targetScale 
+}: { 
+  project: any; 
+  index: number; 
+  progress: any; 
+  range: number[]; 
+  targetScale: number 
+}) => {
+  const container = useRef(null);
+  const scale = useTransform(progress, range, [1, targetScale]);
+
   return (
-    <section className="py-20 lg:py-32 bg-background">
-      <div className="container mx-auto px-6">
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-              className="group relative rounded-2xl overflow-hidden cursor-pointer"
-            >
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
-                  src={project.img}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
-                  width={900}
-                  height={800}
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-center">
-                <h3 className="font-heading text-xl md:text-2xl font-bold">{project.title}</h3>
-                <p className="text-foreground/50 text-xs mt-1 underline underline-offset-4">{project.date}</p>
-              </div>
-            </motion.div>
-          ))}
+    <div ref={container} className="h-screen flex items-center justify-center sticky top-0">
+      <motion.div
+        style={{ scale, top: `calc(-5% + ${index * 25}px)` }}
+        className="relative h-[450px] md:h-[550px] w-full bg-[#1a1a1a] rounded-3xl overflow-hidden origin-top border border-white/5 shadow-2xl"
+      >
+        <div className="absolute inset-0">
+          <img
+            src={project.img}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        
+        <div className="relative h-full flex flex-col items-center justify-center text-center p-6">
+          <h3 className="font-heading text-3xl md:text-5xl font-bold text-white mb-2">
+            {project.title}
+          </h3>
+          <p className="text-white/60 text-xs md:text-sm font-body underline underline-offset-4">
+            {project.date}
+          </p>
         </div>
 
-        {/* Bottom bar */}
+        <div className="absolute bottom-8 right-8">
+          <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
+            <ArrowUpRight className="w-4 h-4" />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+const PortfolioSection = () => {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"]
+  });
+
+  return (
+    <section ref={container} className="relative py-20 lg:py-32 bg-background">
+      <div className="container mx-auto px-6">
+        {/* Sticky Projects List */}
+        <div className="relative">
+          {projects.map((project, i) => {
+            const targetScale = 1 - ( (projects.length - i) * 0.05);
+            return (
+              <ProjectCard 
+                key={i} 
+                index={i} 
+                project={project} 
+                progress={scrollYProgress} 
+                range={[i * 0.33, 1]} 
+                targetScale={targetScale}
+              />
+            );
+          })}
+        </div>
+
+        {/* Original Bottom bar restored */}
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-foreground/60 text-sm max-w-md">
             At our Creative Digital Agency, we bring your ideas to life

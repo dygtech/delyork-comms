@@ -19,4 +19,22 @@ export default defineConfig(({ mode }) => ({
     },
     dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
   },
+  define: {
+    global: "globalThis",
+  },
+  optimizeDeps: {
+    exclude: ["lovable-tagger"],
+    esbuildOptions: {
+      // Node.js global to browser globalThis
+      define: {
+        global: 'globalThis'
+      },
+    },
+  },
+  esbuild: {
+    // Ensure proper polyfills for Bun
+    define: {
+      global: 'globalThis'
+    }
+  }
 }));

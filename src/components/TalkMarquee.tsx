@@ -10,24 +10,14 @@ import {
   useMotionValue,
 } from "framer-motion";
 
-const items = [
-  "Strategic Communications",
-  "Event Planning & Execution",
-  "Partnership Engagement",
-  "Public Relations",
-  "Media Consulting",
-  "Project Management",
-  "Content & Storytelling",
-  "Reputation Management",
-];
+const items = ["LET'S TALK"];
 
-// Helper to wrap values for infinite loop
 const wrap = (min: number, max: number, v: number) => {
   const range = max - min;
   return ((((v - min) % range) + range) % range) + min;
 };
 
-const MarqueeStrip = () => {
+const TalkMarquee = () => {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -40,13 +30,9 @@ const MarqueeStrip = () => {
   const directionFactor = useRef<number>(1);
   const rotation = useMotionValue(0);
 
-  // Map the baseX to a percentage transform
   const x = useTransform(baseX, (v) => `${wrap(0, -50, v)}%`);
 
   useAnimationFrame((t, delta) => {
-    /**
-     * Change direction based on scroll velocity
-     */
     if (smoothVelocity.get() > 0) {
       directionFactor.current = 1;
     } else if (smoothVelocity.get() < 0) {
@@ -54,33 +40,28 @@ const MarqueeStrip = () => {
     }
 
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-
-    // Scroll boost
-    const dragIntensity = 0.05; 
+    const dragIntensity = 0.05;
     moveBy += (smoothVelocity.get() * (delta / 1000)) * dragIntensity;
-
     baseX.set(baseX.get() + moveBy);
-    
-    // Update rotation based on movement (10x faster for visual impact)
-    rotation.set(rotation.get() + moveBy * 10);
+    rotation.set(rotation.get() + moveBy * 5);
   });
 
   return (
-    <div className="bg-primary py-6 overflow-hidden border-y border-white/10 relative z-10">
-      <motion.div 
-        className="flex whitespace-nowrap" 
+    <div className="bg-background pt-10 lg:pt-20 overflow-hidden border-t border-border/30 mt-16 group">
+      <motion.div
+        className="flex whitespace-nowrap cursor-pointer"
         style={{ x }}
       >
-        {[...Array(4)].map((_, idx) => (
+        {[...Array(6)].map((_, idx) => (
           <div key={idx} className="flex items-center">
             {items.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 mx-4 flex-shrink-0">
-                <motion.div style={{ rotate: rotation }}>
-                  <Asterisk className="w-6 h-6 text-white" />
-                </motion.div>
-                <span className="font-heading font-bold text-white text-lg md:text-xl uppercase tracking-wider">
+              <div key={i} className="flex items-center gap-8 mx-8 flex-shrink-0">
+                <span className="font-heading font-black text-foreground text-7xl md:text-9xl lg:text-[12rem] uppercase tracking-tighter transition-colors duration-500 group-hover:text-primary">
                   {item}
                 </span>
+                <motion.div style={{ rotate: rotation }}>
+                  <Asterisk className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-primary" />
+                </motion.div>
               </div>
             ))}
           </div>
@@ -90,7 +71,4 @@ const MarqueeStrip = () => {
   );
 };
 
-
-
-export default MarqueeStrip;
-
+export default TalkMarquee;

@@ -11,23 +11,23 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-            <span className="font-heading font-bold text-primary-foreground text-lg">B</span>
+            <span className="font-heading font-bold text-primary-foreground text-lg">D</span>
           </div>
-          <span className="font-heading font-bold text-foreground text-xl">Blenco.</span>
+          <span className="font-heading font-bold text-foreground text-xl">DYC.</span>
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
-          {["Home", "Pages", "Services", "Blog", "Contact"].map((item) => (
+          {["About", "Services", "Blog", "Contact"].map((item) => (
             <a
               key={item}
               href="#"
               className="text-foreground/80 hover:text-primary transition-colors font-body text-sm flex items-center gap-1"
             >
               {item}
-              {["Home", "Pages", "Services", "Blog"].includes(item) && (
+              {/* {["Home", "Pages", "Services", "Blog"].includes(item) && (
                 <ChevronDown className="w-3.5 h-3.5" />
-              )}
+              )} */}
             </a>
           ))}
         </div>

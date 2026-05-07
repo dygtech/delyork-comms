@@ -1,8 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
+import TalkMarquee from "./TalkMarquee";
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border/30 py-16">
+    <footer className="bg-background border-t border-border/30 py-16 pb-0">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Newsletter */}
@@ -18,7 +19,7 @@ const Footer = () => {
                 <ArrowUpRight className="w-4 h-4 text-primary-foreground" />
               </button>
             </div>
-            <p className="text-foreground/40 text-xs mt-8">Copyright© 2026 Blenco</p>
+            <p className="text-foreground/40 text-xs mt-8">Copyright© {new Date().getFullYear()} Del-york Technologies</p>
             <div className="flex gap-4 mt-4">
               {["f", "𝕏", "📷", "P"].map((icon, i) => (
                 <a
@@ -36,7 +37,7 @@ const Footer = () => {
           <div>
             <h3 className="font-heading text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {["How It Works", "Get To Know Us", "Pricing Packages", "Contact Us"].map((link) => (
+              {["How It Works", "Get To Know Us", "Contact Us"].map((link) => (
                 <li key={link}>
                   <a href="#" className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
                     {link}
@@ -50,14 +51,17 @@ const Footer = () => {
           <div>
             <h3 className="font-heading text-xl font-bold mb-6">Contact</h3>
             <p className="text-foreground/60 text-sm leading-relaxed font-body">
-              1487 Rocky Horse Carre 1487Rocky<br />
-              Arlington, TX 16819 United
+              3, Sapara Williams, <br />
+              Victoria Island Lagos Nigeria.
             </p>
-            <p className="font-heading text-2xl font-bold mt-4">1800 6565 222</p>
-            <p className="text-foreground/60 text-sm mt-2 font-body">info@gmail.com</p>
+            <p className="font-heading text-2xl font-bold mt-4">+234 913 377 7740</p>
+            <p className="text-foreground/60 text-sm mt-2 font-body">benjamin@delyorkgroup.com</p>
           </div>
         </div>
       </div>
+
+      {/* Large Let's Talk Marquee */}
+      <TalkMarquee />
     </footer>
   );
 };
