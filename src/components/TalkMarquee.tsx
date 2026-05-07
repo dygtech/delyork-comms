@@ -52,7 +52,7 @@ const TalkMarquee = () => {
         className="flex whitespace-nowrap cursor-pointer"
         style={{ x }}
       >
-        {[...Array(6)].map((_, idx) => (
+        {[...Array(12)].map((_, idx) => (
           <div key={idx} className="flex items-center">
             {items.map((item, i) => (
               <div key={i} className="flex items-center gap-8 mx-8 flex-shrink-0">

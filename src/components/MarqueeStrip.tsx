@@ -71,7 +71,7 @@ const MarqueeStrip = () => {
         className="flex whitespace-nowrap" 
         style={{ x }}
       >
-        {[...Array(4)].map((_, idx) => (
+        {[...Array(8)].map((_, idx) => (
           <div key={idx} className="flex items-center">
             {items.map((item, i) => (
               <div key={i} className="flex items-center gap-4 mx-4 flex-shrink-0">
