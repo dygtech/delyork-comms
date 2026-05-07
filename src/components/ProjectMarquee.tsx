@@ -58,7 +58,7 @@ const ProjectMarquee = () => {
   return (
     <div className="bg-background py-8 overflow-hidden border-y border-border/30">
       <motion.div className="flex whitespace-nowrap" style={{ x }}>
-        {[...Array(4)].map((_, idx) => (
+        {[...Array(8)].map((_, idx) => (
           <div key={idx} className="flex">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="flex items-center gap-6 mx-6 flex-shrink-0">
