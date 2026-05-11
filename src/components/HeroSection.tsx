@@ -33,18 +33,7 @@ const HeroSection = () => {
             We are{" "}
             <span className="text-primary">Del-York.</span>
             <br />
-            We find {" "}
-            <span className="inline-block align-middle mx-2">
-              <motion.img
-                whileHover={{ scale: 1.1, rotate: -2 }}
-                src={heroTeam}
-                alt="Team"
-                className="w-32 h-16 md:w-44 md:h-20 lg:w-56 lg:h-24 object-cover rounded-full inline-block cursor-pointer"
-                width={224}
-                height={96}
-              />
-            </span>{" "}
-            the why.
+            We find the why.
           </h1>
         </motion.div>
 
@@ -67,9 +56,7 @@ const HeroSection = () => {
               </text>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
-                <span className="font-heading font-bold text-primary-foreground text-xl">D</span>
-              </div>
+              <img src="/logo.png" alt="dyc logo" className="w-14 h-14" />
             </div>
           </div>
         </motion.div>
@@ -92,8 +79,8 @@ const HeroSection = () => {
             <div className="flex items-center gap-3 mt-6">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <motion.div 
-                    key={i} 
+                  <motion.div
+                    key={i}
                     whileHover={{ y: -5, zIndex: 10 }}
                     className="w-10 h-10 rounded-full bg-secondary border-2 border-background overflow-hidden cursor-pointer shadow-lg"
                   >
@@ -120,7 +107,7 @@ const HeroSection = () => {
             <p className="text-foreground/80 text-lg leading-relaxed font-body italic">
               "We tell stories that resonate. For brands, institutions, and governments that shape the future of Nigeria and sub-Saharan Africa."
             </p>
-            <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
+            {/* <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
               <a
                 href="#"
                 className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-bold transition-all hover:gap-5 shadow-xl shadow-primary/20"
@@ -134,14 +121,14 @@ const HeroSection = () => {
               >
                 Our Showreel
               </a>
-            </div>
+            </div> */}
           </div>
         </motion.div>
 
       </div>
 
       {/* Scroll Indicator - moved outside container to stay at bottom of section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
@@ -149,7 +136,7 @@ const HeroSection = () => {
       >
         <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/40 font-bold">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent relative overflow-hidden">
-          <motion.div 
+          <motion.div
             animate={{ y: [0, 48] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-0 left-0 w-full h-1/3 bg-white"

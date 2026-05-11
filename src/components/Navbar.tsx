@@ -11,10 +11,7 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-              <span className="font-heading font-bold text-primary-foreground text-lg">D</span>
-            </div>
-            <span className="font-heading font-bold text-foreground text-xl">DYC.</span>
+            <img src="/logo.png" alt="Dyc logo" className="w-12 h-12" />
           </a>
 
           {/* CTA + Grid */}
