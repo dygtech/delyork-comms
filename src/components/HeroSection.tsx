@@ -1,8 +1,25 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { ArrowUpRight, Star } from "lucide-react";
 import heroTeam from "@/assets/hero-team.jpg";
 
+const quotes = [
+  "We tell stories that resonate. For brands, institutions, and governments that shape the future of Nigeria and sub-Saharan Africa.",
+  "We pave the way for Africa's unparalleled rise on the world stage, blending global insights with local expertise.",
+  "Innovative ideation and execution birth unique solutions that transform the narrative of our continent.",
+  "Global Talent, African Vision: Media as a powerful tool for nation-building and strategic influence."
+];
+
 const HeroSection = () => {
+  const [currentQuote, setCurrentQuote] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentQuote((prev) => (prev + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="min-h-screen relative overflow-hidden flex items-center bg-background">
       {/* Video Background Layer */}
@@ -102,26 +119,36 @@ const HeroSection = () => {
           {/* Divider */}
           <div className="hidden lg:block w-px bg-primary/20 h-32 self-center mx-4" />
 
-          {/* Description */}
-          <div className="max-w-xl text-center lg:text-left">
-            <p className="text-foreground/80 text-lg leading-relaxed font-body italic">
-              "We tell stories that resonate. For brands, institutions, and governments that shape the future of Nigeria and sub-Saharan Africa."
-            </p>
-            {/* <div className="flex flex-wrap gap-4 mt-8 justify-center lg:justify-start">
-              <a
-                href="#"
-                className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-bold transition-all hover:gap-5 shadow-xl shadow-primary/20"
-              >
-                Start a Project
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10 text-foreground px-8 py-4 rounded-full text-sm font-bold transition-all"
-              >
-                Our Showreel
-              </a>
-            </div> */}
+          {/* Description Slider */}
+          <div className="max-w-xl text-center lg:text-left relative">
+            <div className="min-h-[120px] md:min-h-[100px] flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentQuote}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-foreground/80 text-lg md:text-xl leading-relaxed font-body italic"
+                >
+                  "{quotes[currentQuote]}"
+                </motion.p>
+              </AnimatePresence>
+            </div>
+            
+            {/* Pagination Dots */}
+            <div className="flex gap-2 mt-6 justify-center lg:justify-start">
+              {quotes.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentQuote(i)}
+                  className={`h-1.5 transition-all duration-500 rounded-full ${
+                    currentQuote === i ? "w-8 bg-primary" : "w-2 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Go to quote ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 
