@@ -1,4 +1,3 @@
-import { Asterisk } from "lucide-react";
 import { useRef } from "react";
 import {
   motion,
@@ -56,31 +55,29 @@ const MarqueeStrip = () => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     // Scroll boost
-    const dragIntensity = 0.05; 
+    const dragIntensity = 0.05;
     moveBy += (smoothVelocity.get() * (delta / 1000)) * dragIntensity;
 
     baseX.set(baseX.get() + moveBy);
-    
+
     // Update rotation based on movement (10x faster for visual impact)
     rotation.set(rotation.get() + moveBy * 10);
   });
 
   return (
     <div className="bg-primary py-6 overflow-hidden border-y border-white/10 relative z-10">
-      <motion.div 
-        className="flex whitespace-nowrap" 
+      <motion.div
+        className="flex whitespace-nowrap"
         style={{ x }}
       >
         {[...Array(8)].map((_, idx) => (
           <div key={idx} className="flex items-center">
             {items.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 mx-4 flex-shrink-0">
-                <motion.div style={{ rotate: rotation }}>
-                  <Asterisk className="w-6 h-6 text-white" />
-                </motion.div>
-                <span className="font-heading font-bold text-white text-lg md:text-xl uppercase tracking-wider">
+              <div key={i} className="flex items-center gap-6 mx-4 flex-shrink-0">
+                <span className="font-heading font-bold text-white text-lg md:text-xl uppercase">
                   {item}
                 </span>
+                <div className="h-5 w-[1px] bg-white ml-2" />
               </div>
             ))}
           </div>

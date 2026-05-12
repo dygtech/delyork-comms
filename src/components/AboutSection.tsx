@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Asterisk } from "lucide-react";
+import { Asterisk } from "lucide-react";
 import aboutTeam from "@/assets/about-team.jpg";
 
 const AboutSection = () => {
