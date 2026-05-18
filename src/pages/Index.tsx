@@ -18,7 +18,7 @@ import Preloader from "@/components/Preloader";
 const Index = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
-      <Preloader />
+      {/* <Preloader /> */}
       <Navbar />
       <HeroSection />
       <MarqueeStrip />
