@@ -15,7 +15,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
-          {["About", "Services", "Blog", "Contact"].map((item) => (
+          {["The Company", "The Work", "The Thinking", "The Connect"].map((item) => (
             <a
               key={item}
               href="#"
