@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Asterisk } from "lucide-react";
-import aboutTeam from "@/assets/about-team.jpg";
 
 const AboutSection = () => {
   return (
@@ -17,25 +16,20 @@ const AboutSection = () => {
           <span className="text-foreground/60 text-sm uppercase tracking-widest font-body">We do the work for you</span>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
-          {/* Left content */}
+        <div className="w-full">
+          {/* Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:w-1/2"
+            className="w-full"
           >
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Your story is {" "}
-              <span className="text-primary">complex.</span>
-            </h2>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              We make it {" "}
-              <span className="text-primary">irresistible.</span>
+              Your story is <span className="text-primary">complex.</span> We make it <span className="text-primary">irresistible.</span>
             </h2>
 
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
               {[
                 {
                   id: "01",
@@ -91,49 +85,7 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Right image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, rotate: 2 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:w-1/2 relative"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 border border-border/50 group">
-              <motion.img
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                src={aboutTeam}
-                alt="About our agency"
-                className="w-full h-full object-cover aspect-[4/5] lg:aspect-auto"
-                loading="lazy"
-                width={640}
-                height={800}
-              />
-            </div>
-            {/* Floating rotating badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6, type: "spring" }}
-              className="absolute -bottom-10 -left-10 w-32 h-32 md:w-40 md:h-40 bg-background rounded-full flex items-center justify-center p-2 shadow-xl"
-            >
-              <svg className="animate-spin-slow w-full h-full" viewBox="0 0 200 200">
-                <defs>
-                  <path id="aboutCircle" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" />
-                </defs>
-                <text className="fill-primary text-[16px] font-bold tracking-[4px] uppercase" fontFamily="DM Sans">
-                  <textPath href="#aboutCircle">
-                    DEL-YORK • COMMUNICATIONS • STRATEGY • CREATIVE •
-                  </textPath>
-                </text>
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Asterisk className="w-8 h-8 text-primary animate-pulse" />
-              </div>
-            </motion.div>
-          </motion.div>
+
         </div>
       </div>
     </section>
