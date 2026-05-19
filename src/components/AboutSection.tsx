@@ -3,7 +3,7 @@ import { Asterisk } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section className="py-20 lg:py-32 bg-background relative overflow-hidden">
+    <section id="about" className="py-20 lg:py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Subtitle */}
         <motion.div

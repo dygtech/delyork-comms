@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Asterisk, X, ArrowRight } from "lucide-react";
 
 const services = [
@@ -43,8 +43,78 @@ const services = [
   },
 ];
 
+const ServiceCard = ({
+  service,
+  index,
+  progress,
+  range,
+  targetScale,
+  onClick
+}: {
+  service: typeof services[0];
+  index: number;
+  progress: any;
+  range: number[];
+  targetScale: number;
+  onClick: () => void;
+}) => {
+  const cardRef = useRef(null);
+  const scale = useTransform(progress, range, [1, targetScale]);
+
+  return (
+    <div ref={cardRef} className="h-screen flex items-center justify-center sticky top-0">
+      <motion.div
+        layoutId={`card-${service.id}`}
+        style={{ scale, top: `calc(-5% + ${index * 25}px)`, backgroundColor: service.color }}
+        onClick={onClick}
+        className="relative h-[450px] md:h-[500px] w-full rounded-3xl overflow-hidden origin-top border border-white/5 shadow-2xl flex flex-col p-8 md:p-12 cursor-pointer group"
+      >
+        <div className="relative z-10 flex flex-col h-full text-white">
+          <span className="text-sm font-mono opacity-60 mb-8 block">{service.num}</span>
+          
+          <h3 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-6 group-hover:translate-x-2 transition-transform duration-500 max-w-2xl leading-none">
+            {service.title}
+          </h3>
+          
+          <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl font-body mb-auto">
+            {service.description}
+          </p>
+          
+          <div className="flex flex-wrap gap-2 mt-8">
+            {service.tags.map(tag => (
+              <span 
+                key={tag}
+                className="px-4 py-2 rounded-full border border-white/20 text-xs font-medium backdrop-blur-sm bg-white/5"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
+            <motion.div 
+              whileHover={{ scale: 1.1, x: 5 }}
+              className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Decorative gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      </motion.div>
+    </div>
+  );
+};
+
 const ServicesSection = () => {
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"]
+  });
 
   useEffect(() => {
     if (selectedService) {
@@ -56,7 +126,7 @@ const ServicesSection = () => {
   }, [selectedService]);
 
   return (
-    <section className="py-24 lg:py-40 bg-background relative">
+    <section id="services" ref={container} className="relative py-24 lg:py-40 bg-background">
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -81,54 +151,22 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-          {services.map((service, idx) => (
-            <motion.div
-              key={service.id}
-              layoutId={`card-${service.id}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              onClick={() => setSelectedService(service)}
-              className="group cursor-pointer relative overflow-hidden rounded-3xl min-h-[400px] flex flex-col p-8 lg:p-12"
-              style={{ backgroundColor: service.color }}
-            >
-              <div className="relative z-10 flex flex-col h-full text-white">
-                <span className="text-sm font-body opacity-60 mb-8">{service.num}</span>
-                <h3 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 group-hover:translate-x-2 transition-transform duration-500">
-                  {service.title}
-                </h3>
-                <p className="text-white/80 text-lg leading-relaxed max-w-md font-body mb-auto">
-                  {service.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mt-12">
-                  {service.tags.map(tag => (
-                    <span 
-                      key={tag}
-                      className="px-4 py-2 rounded-full border border-white/20 text-xs font-medium backdrop-blur-sm bg-white/5"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="absolute bottom-8 right-8 lg:bottom-12 lg:right-12">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, x: 5 }}
-                    className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* Decorative gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            </motion.div>
-          ))}
+        {/* Sticky Cards List */}
+        <div className="relative">
+          {services.map((service, i) => {
+            const targetScale = 1 - ((services.length - i) * 0.05);
+            return (
+              <ServiceCard 
+                key={service.id} 
+                index={i} 
+                service={service} 
+                progress={scrollYProgress} 
+                range={[i * 0.25, 1]} 
+                targetScale={targetScale}
+                onClick={() => setSelectedService(service)}
+              />
+            );
+          })}
         </div>
       </div>
 
@@ -201,7 +239,7 @@ const ServicesSection = () => {
                     <Asterisk className="w-24 h-24 text-white/10 animate-spin-slow" />
                   </motion.div>
 
-                  {/* Render Sub-services if they exist (from the new image) */}
+                  {/* Render Sub-services if they exist */}
                   {selectedService.subServices ? (
                     <div className="flex flex-col border-t border-white/10">
                       {selectedService.subServices.map((sub, i) => (
