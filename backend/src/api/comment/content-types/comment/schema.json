@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment",
+    "description": "WordPress migrated blog post comments"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "author_name": {
+      "type": "string",
+      "required": true
+    },
+    "author_email": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "wp_id": {
+      "type": "integer",
+      "unique": true
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "comments"
+    }
+  }
+}

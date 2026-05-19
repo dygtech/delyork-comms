@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { useEffect } from "react";
 import Lenis from "lenis";
 import Index from "./pages/Index.tsx";
+import Work from "./pages/Work.tsx";
+import BlogDetail from "./pages/BlogDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -19,6 +21,7 @@ const App = () => {
       wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
+      prevent: (node: Element) => node.closest("[data-lenis-prevent]") !== null,
     });
 
     function raf(time: number) {
@@ -41,6 +44,8 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/work/:slug" element={<Work />} />
+            <Route path="/blog/:slug" element={<BlogDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
