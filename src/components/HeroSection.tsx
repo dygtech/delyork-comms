@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import heroTeam from "@/assets/hero-team.jpg";
+import dyPreloader from '@/assets/delyork-anim.gif'
 
 const HeroSection = () => {
 
@@ -57,7 +58,7 @@ const HeroSection = () => {
               </text>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <img src="/logo.png" alt="dyc logo" className="w-14 h-14" />
+              <img src={dyPreloader} alt="dyc logo" className="w-14 h-14" />
             </div>
           </div>
         </motion.div>
