@@ -9,6 +9,7 @@ import Index from "./pages/Index.tsx";
 import Work from "./pages/Work.tsx";
 import BlogDetail from "./pages/BlogDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/work/:slug" element={<Work />} />

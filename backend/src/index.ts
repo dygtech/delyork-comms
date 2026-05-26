@@ -93,14 +93,40 @@ async function runMigration(strapi: Core.Strapi) {
 
     const postMap = new Map<number, any>();
     
-    // Fetch posts page 1
-    const postsRes = await fetchWithRetry(`${WP_API}/posts&per_page=15`);
-    if (!postsRes.ok) throw new Error(`Failed to fetch WordPress posts: ${postsRes.statusText}`);
-    const wpPosts = (await postsRes.json()) as any[];
+    // Fetch ALL posts with pagination
+    let page = 1;
+    let allWpPosts: any[] = [];
+    const perPage = 50; // Max per page for WP REST API
 
-    console.log(`Fetched ${wpPosts.length} posts from WordPress to process.`);
+    while (true) {
+      console.log(`  📄 Fetching posts page ${page}...`);
+      const postsRes = await fetchWithRetry(`${WP_API}/posts&per_page=${perPage}&page=${page}`);
+      
+      if (!postsRes.ok) {
+        // WP returns 400 when page exceeds total pages
+        if (postsRes.status === 400) {
+          console.log(`  ✔ No more pages (stopped at page ${page}).`);
+          break;
+        }
+        throw new Error(`Failed to fetch WordPress posts page ${page}: ${postsRes.statusText}`);
+      }
+      
+      const pagePosts = (await postsRes.json()) as any[];
+      if (pagePosts.length === 0) break;
+      
+      allWpPosts = allWpPosts.concat(pagePosts);
+      console.log(`  ✔ Page ${page}: fetched ${pagePosts.length} posts (total so far: ${allWpPosts.length}).`);
+      
+      // Check X-WP-TotalPages header to know if there are more pages
+      const totalPages = parseInt(postsRes.headers.get('X-WP-TotalPages') || '1', 10);
+      if (page >= totalPages) break;
+      
+      page++;
+    }
 
-    for (const wpPost of wpPosts) {
+    console.log(`Fetched ${allWpPosts.length} total posts from WordPress to process.`);
+
+    for (const wpPost of allWpPosts) {
       console.log(`\n• Processing post: "${wpPost.title.rendered}" (WP ID: ${wpPost.id})`);
 
       // Check if post already exists

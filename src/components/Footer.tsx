@@ -1,6 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
 import TalkMarquee from "./TalkMarquee";
 
+
+
+const quickLinks = [
+  { label: "How It Works", href: "#portfolio" },
+  { label: "Get To Know Us", href: "#about" },
+];
+
 const Footer = () => {
   return (
     <footer className="bg-background border-t border-border/30 py-16 pb-0">
@@ -37,10 +44,10 @@ const Footer = () => {
           <div>
             <h3 className="font-heading text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {["How It Works", "Get To Know Us", "Contact Us"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
-                    {link}
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
+                    {link.label}
                   </a>
                 </li>
               ))}

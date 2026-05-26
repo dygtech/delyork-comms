@@ -18,10 +18,13 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
 
+      - name: Setup Bun 🍞
+        uses: oven-sh/setup-bun@v2
+
       - name: Install and Build 🔧
         run: |
-          npm install
-          npm run build
+          bun install
+          bun run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

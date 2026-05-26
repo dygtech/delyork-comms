@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -12,8 +13,14 @@ const navItems = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const sections = ["about", "portfolio", "services", "connect"];
     
     const observerOptions = {
@@ -51,24 +58,58 @@ const Navbar = () => {
       observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isHomePage]);
+
+  /**
+   * Handles nav link clicks. If we're already on the homepage, smooth-scroll
+   * to the target section. If we're on a detail page, navigate home first
+   * and pass the target hash so the homepage can scroll to it on mount.
+   */
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+
+    if (isHomePage) {
+      // Already on homepage — just scroll to the section
+      const targetId = href.replace("#", "");
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // On a detail page — navigate to homepage with the hash
+      navigate("/" + href);
+    }
+
+    setMobileOpen(false);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
+        <a href="/" onClick={handleLogoClick} className="flex items-center gap-2">
           <img src="/logo.png" alt="Dyc logo" className="w-12 h-12" />
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
-            const isActive = activeSection === item.href.slice(1);
+            const isActive = isHomePage && activeSection === item.href.slice(1);
             return (
               <a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`transition-colors font-body text-sm flex items-center gap-1 ${
                   isActive 
                     ? "text-primary font-bold" 
@@ -85,6 +126,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-4">
           <a
             href="#connect"
+            onClick={(e) => handleNavClick(e, "#connect")}
             className="bg-secondary text-foreground px-6 py-2.5 rounded-full text-sm font-body hover:bg-primary hover:text-primary-foreground transition-all"
           >
             Let's Talk
@@ -111,12 +153,12 @@ const Navbar = () => {
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => {
-                const isActive = activeSection === item.href.slice(1);
+                const isActive = isHomePage && activeSection === item.href.slice(1);
                 return (
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className={`text-sm font-body transition-colors ${
                       isActive 
                         ? "text-primary font-bold" 
@@ -129,7 +171,7 @@ const Navbar = () => {
               })}
               <a
                 href="#connect"
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => handleNavClick(e, "#connect")}
                 className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-body text-center"
               >
                 Let's Talk
