@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Asterisk, X, ArrowRight } from "lucide-react";
+import EventsImg from "@/assets/01-events-and-execution-banner.webp";
+import StratCommImg from "@/assets/02-strategic-communications-banner.webp";
+import PartnershipImg from "@/assets/03-partnership-engagement-banner.webp";
+import ProjectMgmtImg from "@/assets/04-project-management-banner.webp";
 
 const services = [
   {
@@ -10,6 +14,7 @@ const services = [
     description: "Ministerial summits. Galas. Product launches. Exhibitions. Job fairs. We handle it end-to-end and make it look easy.",
     tags: ["Multi-day summits", "Gala dinners", "Exhibitions"],
     color: "#9B1D1D", // Red
+    image: EventsImg
   },
   {
     id: "strat-comm",
@@ -18,6 +23,7 @@ const services = [
     description: "Narratives that hold up under pressure. Media relations, executive messaging, digital strategy, reputation management.",
     tags: ["Media relations", "PR", "Reputation mgmt"],
     color: "#1E5D48", // Green
+    image: StratCommImg,
     subServices: [
       { title: "Government and Institutional Communications", label: "Public sector" },
       { title: "Development Programme Communications", label: "Development" },
@@ -32,6 +38,7 @@ const services = [
     description: "We broker. We convene. We connect institutions, government, private sector, and development partners around shared value.",
     tags: ["Sponsorships", "Stakeholder coord.", "Ecosystem mapping"],
     color: "#4F46B9", // Purple
+    image: PartnershipImg,
   },
   {
     id: "project-mgmt",
@@ -40,6 +47,7 @@ const services = [
     description: "One point of accountability. Clear milestones. No coordination lag. We run the whole thing so nothing falls through the cracks.",
     tags: ["PMO delivery", "Vendor management", "Risk and reporting"],
     color: "#5D3F1E", // Brown
+    image: ProjectMgmtImg,
   },
 ];
 
@@ -53,7 +61,7 @@ const ServiceCard = ({
 }: {
   service: typeof services[0];
   index: number;
-  progress: any;
+  progress: MotionValue<number>;
   range: number[];
   targetScale: number;
   onClick: () => void;
@@ -67,38 +75,49 @@ const ServiceCard = ({
         layoutId={`card-${service.id}`}
         style={{ scale, top: `calc(-5% + ${index * 25}px)`, backgroundColor: service.color }}
         onClick={onClick}
-        className="relative h-[450px] md:h-[500px] w-full rounded-3xl overflow-hidden origin-top border border-white/5 shadow-2xl flex flex-col p-8 md:p-12 cursor-pointer group"
+        className="relative h-[450px] md:h-[500px] w-full rounded-3xl overflow-hidden origin-top border border-white/5 shadow-2xl cursor-pointer group"
       >
-        <div className="relative z-10 flex flex-col h-full text-white">
-          <span className="text-sm font-mono opacity-60 mb-8 block">{service.num}</span>
-          
-          <h3 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-6 group-hover:translate-x-2 transition-transform duration-500 max-w-2xl leading-none">
-            {service.title}
-          </h3>
-          
-          <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl font-body mb-auto">
-            {service.description}
-          </p>
-          
-          <div className="flex flex-wrap gap-2 mt-8">
-            {service.tags.map(tag => (
-              <span 
-                key={tag}
-                className="px-4 py-2 rounded-full border border-white/20 text-xs font-medium backdrop-blur-sm bg-white/5"
-              >
-                {tag}
-              </span>
-            ))}
+        {/* Mobile: Image on top / Desktop: Text left, Image right */}
+        <div className="relative z-10 flex flex-col-reverse md:flex-row h-full text-white">
+          {/* Text Content - 60% width on desktop */}
+          <div className="md:w-[60%] flex flex-col justify-center px-8 pb-8 pt-6 md:p-12">
+            <span className="text-sm font-mono opacity-60 mb-6 md:mb-8 block">{service.num}</span>
+            <h3 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 group-hover:translate-x-2 transition-transform duration-500 max-w-2xl leading-none">
+              {service.title}
+            </h3>
+            <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-xl font-body mb-auto">
+              {service.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-6 md:mt-8">
+              {service.tags.map(tag => (
+                <span
+                  key={tag}
+                  className="px-4 py-2 rounded-full border border-white/20 text-xs font-medium backdrop-blur-sm bg-white/5"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
-            <motion.div 
-              whileHover={{ scale: 1.1, x: 5 }}
-              className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </motion.div>
+          {/* Image - 40% width on desktop, full bleed no padding */}
+          <div className="md:w-[40%] relative h-[200px] md:h-full overflow-hidden shrink-0">
+            <img
+              src={service.image}
+              alt={service.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
+        </div>
+
+        {/* Arrow button - absolute positioned on card */}
+        <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 z-20">
+          <motion.div
+            whileHover={{ scale: 1.1, x: 5 }}
+            className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-500"
+          >
+            <ArrowRight className="w-5 h-5" />
+          </motion.div>
         </div>
 
         {/* Decorative gradient overlay */}
@@ -156,12 +175,12 @@ const ServicesSection = () => {
           {services.map((service, i) => {
             const targetScale = 1 - ((services.length - i) * 0.05);
             return (
-              <ServiceCard 
-                key={service.id} 
-                index={i} 
-                service={service} 
-                progress={scrollYProgress} 
-                range={[i * 0.25, 1]} 
+              <ServiceCard
+                key={service.id}
+                index={i}
+                service={service}
+                progress={scrollYProgress}
+                range={[i * 0.25, 1]}
                 targetScale={targetScale}
                 onClick={() => setSelectedService(service)}
               />
@@ -182,7 +201,7 @@ const ServicesSection = () => {
               onClick={() => setSelectedService(null)}
               className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md"
             />
-            
+
             {/* Modal Content */}
             <motion.div
               layoutId={`card-${selectedService.id}`}
@@ -281,7 +300,7 @@ const ServicesSection = () => {
                       ))}
                     </div>
                   )}
-                  
+
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

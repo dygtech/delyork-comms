@@ -1,24 +1,21 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import heroTeam from "@/assets/hero-team.jpg";
-import dyPreloader from '@/assets/delyork-anim.gif'
+import dyPreloader from '@/assets/delyork-anim.gif';
+import landingHero from '@/assets/landing-page-hero.webp';
 
 const HeroSection = () => {
 
   return (
     <section className="min-h-screen relative overflow-hidden flex items-center bg-background">
-      {/* Video Background Layer */}
+      {/* Image Background Layer */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <img
+          src={landingHero}
+          alt="Hero background"
           className="w-full h-full object-cover"
-        >
-          <source src="https://delyorkcommunications.com/wp-content/uploads/2020/01/delyork-video.mp4" type="video/mp4" />
-        </video>
-        {/* Refined Overlay - more transparent to let the video through */}
+        />
+        {/* Refined Overlay - more transparent to let the image through */}
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20" />
       </div>
