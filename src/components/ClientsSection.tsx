@@ -1,102 +1,79 @@
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
+import { motion } from "framer-motion";
 import { Asterisk } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
-const brands = [
-  "Lagos State Government",
-  "Mastercard Foundation",
-  "Islamic Development Bank",
-  "GAC Motors Nigeria",
-  "Manufacturers Assoc. of Nigeria",
-  "Dangote Foundation",
-  "Bank of Industry",
-  "LSETF",
-  "Ogun State Government",
-  "Tribeca Festival",
-  "BellaNaija",
-  "YAPPI Programme"
+import bellaNaija from "../assets/clients/bella-naija.png";
+import boi from "../assets/clients/boi.jpeg";
+import canon from "../assets/clients/canon.jpg";
+import cnn from "../assets/clients/cnn.jpg";
+import dangote from "../assets/clients/dangote.jpg";
+import dstv from "../assets/clients/dstv.jpg";
+import gacMotors from "../assets/clients/gac-motors.jpg";
+import gionee from "../assets/clients/gionee.jpg";
+import gree from "../assets/clients/gree.jpg";
+import isdb from "../assets/clients/isdb.png";
+import lasg from "../assets/clients/lasg.jpg";
+import lontor from "../assets/clients/lontor.jpg";
+import lsetf from "../assets/clients/lsetf.png";
+import man from "../assets/clients/man.jpeg";
+import mastercard from "../assets/clients/mastercard.svg";
+import nnpc from "../assets/clients/nnpc.jpg";
+import ogsg from "../assets/clients/ogsg.jpeg";
+import pepsi from "../assets/clients/pepsi.jpg";
+import swypa from "../assets/clients/swypa.jpg";
+import tabsConnect from "../assets/clients/tabs-connect.jpg";
+import tecno from "../assets/clients/tecno.jpg";
+import tribeca from "../assets/clients/tribeca.png";
+import uba from "../assets/clients/uba.jpg";
+import yappi from "../assets/clients/yappi.jpg";
+
+const clients = [
+  { name: "BellaNaija", src: bellaNaija },
+  { name: "Bank of Industry", src: boi },
+  { name: "Canon", src: canon },
+  { name: "CNN", src: cnn },
+  { name: "Dangote", src: dangote },
+  { name: "DSTV", src: dstv },
+  { name: "GAC Motors", src: gacMotors },
+  { name: "Gionee", src: gionee },
+  { name: "Gree", src: gree },
+  { name: "Islamic Development Bank", src: isdb },
+  { name: "Lagos State Government", src: lasg },
+  { name: "Lontor", src: lontor },
+  { name: "LSETF", src: lsetf },
+  { name: "MAN", src: man },
+  { name: "Mastercard", src: mastercard },
+  { name: "NNPC", src: nnpc },
+  { name: "Ogun State Government", src: ogsg },
+  { name: "Pepsi", src: pepsi },
+  { name: "Swypa", src: swypa },
+  { name: "Tabs Connect", src: tabsConnect },
+  { name: "Tecno", src: tecno },
+  { name: "Tribeca", src: tribeca },
+  { name: "UBA", src: uba },
+  { name: "YAPPI", src: yappi }
 ];
 
-const ClientCard = ({ 
-  brand, 
-  index, 
-  isRandomlyActive, 
-  onHoverStart, 
-  onHoverEnd 
-}: { 
-  brand: string; 
-  index: number; 
-  isRandomlyActive: boolean;
-  onHoverStart: () => void;
-  onHoverEnd: () => void;
-}) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = ({ currentTarget, clientX, clientY }: React.MouseEvent) => {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  };
-
-  // Center the spotlight if randomly active
-  useEffect(() => {
-    if (isRandomlyActive && cardRef.current) {
-      const { width, height } = cardRef.current.getBoundingClientRect();
-      mouseX.set(width / 2);
-      mouseY.set(height / 2);
-    }
-  }, [isRandomlyActive]);
-
-  const background = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.1), transparent 40%)`;
-
+const ClientLogo = ({ src, name, index }: { src: string; name: string; index: number }) => {
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={onHoverStart}
-      onMouseLeave={onHoverEnd}
-      className={`group relative bg-[#121212] rounded-xl p-8 h-40 flex items-center justify-center border transition-all duration-700 overflow-hidden cursor-pointer ${isRandomlyActive ? "border-primary/50 shadow-[0_0_30px_-10px_rgba(var(--primary),0.3)]" : "border-white/5"
-        } hover:border-white/20`}
+      className="bg-white rounded-xl p-6 h-32 md:h-40 flex items-center justify-center transition-all duration-300 hover:shadow-lg border border-gray-100"
     >
-      {/* Spotlight Effect */}
-      <motion.div
-        className={`pointer-events-none absolute -inset-px rounded-xl transition duration-500 ${isRandomlyActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-          }`}
-        style={{ background }}
+      <img
+        src={src}
+        alt={`${name} logo`}
+        className="max-w-full max-h-full object-contain transition-all duration-300"
       />
-
-      <span className={`font-heading text-lg md:text-xl font-bold text-center transition-colors duration-500 relative z-10 leading-tight ${isRandomlyActive ? "text-foreground" : "text-foreground/40 group-hover:text-foreground"
-        }`}>
-        {brand}
-      </span>
     </motion.div>
   );
 };
 
 const ClientsSection = () => {
-  const [activeIdx, setActiveIdx] = useState(-1);
-  const [isAnyHovered, setIsAnyHovered] = useState(false);
-
-  useEffect(() => {
-    if (isAnyHovered) {
-      setActiveIdx(-1);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      setActiveIdx(Math.floor(Math.random() * brands.length));
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [isAnyHovered]);
-
   return (
-    <section className="py-24 lg:py-40 bg-background overflow-hidden">
+    <section className="py-24 lg:py-40 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -106,23 +83,21 @@ const ClientsSection = () => {
         >
           <div className="flex items-center gap-2 mb-6">
             <Asterisk className="w-5 h-5 text-primary animate-pulse" />
-            <span className="text-foreground/60 text-sm uppercase tracking-[0.3em] font-bold font-body">Our Network</span>
+            <span className="text-black/60 text-sm uppercase tracking-[0.3em] font-bold font-body">Our Network</span>
           </div>
-          <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight">
+          <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-black">
             The <span className="text-primary italic">brands & institutions</span> <br className="hidden md:block" />
             that trust us.
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {brands.map((brand, idx) => (
-            <ClientCard
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {clients.map((client, idx) => (
+            <ClientLogo
               key={idx}
-              brand={brand}
+              src={client.src}
+              name={client.name}
               index={idx}
-              isRandomlyActive={activeIdx === idx}
-              onHoverStart={() => setIsAnyHovered(true)}
-              onHoverEnd={() => setIsAnyHovered(false)}
             />
           ))}
         </div>
