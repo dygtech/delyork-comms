@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Star } from "lucide-react";
 import heroTeam from "@/assets/hero-team.jpg";
-import dyPreloader from '@/assets/delyork-anim.gif';
+import dyPreloader from '@/assets/dyc-logo.gif';
 import landingHero from '@/assets/landing-page-hero.webp';
 
 const HeroSection = () => {
