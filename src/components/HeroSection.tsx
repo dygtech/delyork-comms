@@ -55,7 +55,7 @@ const HeroSection = () => {
               </text>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <img src={dyPreloader} alt="dyc logo" className="w-14 h-14" />
+              <img src={dyPreloader} alt="dyc logo" className="w-18 h-18" />
             </div>
           </div>
         </motion.div>
