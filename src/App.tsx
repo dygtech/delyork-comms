@@ -1,19 +1,24 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index.tsx";
 import Work from "./pages/Work.tsx";
+import WorksList from "./pages/WorksList.tsx";
 import BlogDetail from "./pages/BlogDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop";
+import { CustomCursor } from "./components/CustomCursor";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  const location = useLocation();
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -42,16 +47,18 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
+        <ScrollToTop />
+        <CustomCursor />
+        <AnimatePresence mode="wait">
+          <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Index />} />
+            <Route path="/works" element={<WorksList />} />
             <Route path="/work/:slug" element={<Work />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </AnimatePresence>
       </TooltipProvider>
     </QueryClientProvider>
   );

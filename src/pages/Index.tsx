@@ -14,9 +14,17 @@ import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
+import { motion } from "framer-motion";
+
 const Index = () => {
   return (
-    <div className="bg-background text-foreground min-h-screen">
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+      className="bg-background text-foreground min-h-screen"
+    >
       {/* <Preloader /> */}
       <Navbar />
       <HeroSection />
@@ -33,7 +41,7 @@ const Index = () => {
       <BlogSection />
       <CTASection />
       <Footer />
-    </div>
+    </motion.main>
   );
 };
 
