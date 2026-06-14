@@ -29,8 +29,8 @@ const HeroSection = () => {
           className="mt-12 lg:mt-20"
         >
           <h1 className="font-heading text-5xl md:text-7xl lg:text-[6.5rem] font-bold leading-[0.95] tracking-tight">
-            We are{" "}
-            <span className="text-primary">Del-York.</span>
+            We are{" "} <br />
+            <span className="text-primary">Del-York Communications.</span>
             <br />
             We find the why.
           </h1>
@@ -41,7 +41,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="absolute top-10 right-8 lg:right-10 hidden md:block"
+          className="absolute top-20 right-8 lg:right-10 hidden md:block"
         >
           <div className="relative w-36 h-36 lg:w-44 lg:h-44 bg-background/20 backdrop-blur-md rounded-full p-2 border border-white/5">
             <svg className="animate-spin-slow w-full h-full" viewBox="0 0 200 200">
@@ -70,7 +70,7 @@ const HeroSection = () => {
           {/* Left stat */}
           <div className="flex-shrink-0 group cursor-default">
             <div className="flex items-end gap-1">
-              <span className="font-heading text-5xl md:text-6xl font-bold text-primary transition-transform duration-500 group-hover:scale-110 block">500</span>
+              <span className="font-heading text-5xl md:text-6xl font-bold text-primary transition-transform duration-500 group-hover:scale-110 block">30</span>
               <span className="font-heading text-3xl font-bold text-primary mb-2">+</span>
             </div>
             <p className="text-foreground/80 text-sm mt-1 uppercase tracking-widest font-medium">Projects Delivered</p>
