@@ -118,7 +118,7 @@ const WorksList = () => {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
           <div className="flex gap-2 bg-secondary/50 p-2 rounded-full overflow-x-auto max-w-full no-scrollbar">
-            {uniqueCategories.slice(0, 4).map((cat) => (
+            {uniqueCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
