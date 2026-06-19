@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Newsletter */}
           <div>
-            <h3 className="font-heading text-xl font-bold mb-6">Subscribe Our Newsletter!</h3>
+            <h3 className="font-heading text-xl font-bold mb-6">Subscribe To Our Newsletter!</h3>
             <div className="flex items-center bg-card rounded-full overflow-hidden border border-border/30">
               <input
                 type="email"
