@@ -47,6 +47,29 @@ export interface StrapiPost {
   comments?: StrapiComment[];
 }
 
+export interface StrapiJobListing {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  department: string;
+  location: string;
+  employment_type: string;
+  description?: string;
+  requirements?: string;
+  is_active?: boolean;
+}
+
+export interface StrapiApplication {
+  id: number;
+  full_name: string;
+  email: string;
+  phone?: string;
+  cover_letter: string;
+  portfolio_url?: string;
+  job_listing?: number;
+}
+
 /**
  * Fetch all portfolios from Strapi
  */
@@ -133,6 +156,42 @@ export async function createComment(
   });
   if (!res.ok) {
     throw new Error(`Failed to create comment: ${res.statusText}`);
+  }
+  const json = await res.json();
+  return json.data;
+}
+
+/**
+ * Fetch all active job listings from Strapi
+ */
+export async function getJobListings(): Promise<StrapiJobListing[]> {
+  const res = await fetch(`${BACKEND_URL}/api/job-listings?filters[is_active][$eq]=true&sort=createdAt:desc`);
+  if (!res.ok) {
+    // Silently return empty array if endpoint doesn't exist yet
+    return [];
+  }
+  const json = await res.json();
+  return json.data || [];
+}
+
+/**
+ * Submit a job application to Strapi
+ */
+export async function submitJobApplication(data: {
+  full_name: string;
+  email: string;
+  phone?: string;
+  cover_letter: string;
+  portfolio_url?: string;
+  job_listing?: number;
+}): Promise<StrapiApplication> {
+  const res = await fetch(`${BACKEND_URL}/api/job-applications`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data }),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to submit application: ${res.statusText}`);
   }
   const json = await res.json();
   return json.data;

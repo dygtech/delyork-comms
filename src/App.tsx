@@ -10,6 +10,7 @@ import Index from "./pages/Index.tsx";
 import Work from "./pages/Work.tsx";
 import WorksList from "./pages/WorksList.tsx";
 import BlogDetail from "./pages/BlogDetail.tsx";
+import Careers from "./pages/Careers.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop";
 import { CustomCursor } from "./components/CustomCursor";
@@ -55,6 +56,7 @@ const App = () => {
             <Route path="/works" element={<WorksList />} />
             <Route path="/work/:slug" element={<Work />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
+            <Route path="/careers" element={<Careers />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

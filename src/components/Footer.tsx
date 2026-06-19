@@ -1,11 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import TalkMarquee from "./TalkMarquee";
 
 
 
 const quickLinks = [
-  { label: "How It Works", href: "#portfolio" },
-  { label: "Get To Know Us", href: "#about" },
+  { label: "How It Works", href: "#portfolio", isHash: true },
+  { label: "Get To Know Us", href: "#about", isHash: true },
+  { label: "Careers", href: "/careers", isHash: false },
 ];
 
 const Footer = () => {
@@ -46,9 +48,15 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
-                    {link.label}
-                  </a>
+                  {link.isHash ? (
+                    <a href={link.href} className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link to={link.href} className="text-foreground/60 hover:text-primary text-sm transition-colors font-body">
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

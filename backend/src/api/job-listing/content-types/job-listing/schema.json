@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_listings",
+  "info": {
+    "singularName": "job-listing",
+    "pluralName": "job-listings",
+    "displayName": "Job Listing",
+    "description": "Open job positions at Del-York Communications"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "department": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true,
+      "default": "Lagos, Nigeria"
+    },
+    "employment_type": {
+      "type": "enumeration",
+      "enum": ["Full-time", "Part-time", "Contract", "Internship"],
+      "default": "Full-time",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "requirements": {
+      "type": "text"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "applications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::job-application.job-application",
+      "mappedBy": "job_listing"
+    }
+  }
+}

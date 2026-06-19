@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPortfolios, getLatestPosts, getPortfolioBySlug, getPosts, getPostBySlug } from "./api";
+import { getPortfolios, getLatestPosts, getPortfolioBySlug, getPosts, getPostBySlug, getJobListings } from "./api";
 
 export const queryKeys = {
   portfolios: ["portfolios"] as const,
@@ -7,6 +7,7 @@ export const queryKeys = {
   latestPosts: (limit: number) => ["posts", "latest", limit] as const,
   posts: ["posts"] as const,
   postBySlug: (slug: string) => ["post", slug] as const,
+  jobListings: ["job-listings"] as const,
 };
 
 /**
@@ -63,5 +64,16 @@ export function usePostBySlugQuery(slug: string) {
     queryFn: () => getPostBySlug(slug),
     staleTime: 1000 * 60 * 5, // 5 minutes cache validity
     enabled: !!slug,
+  });
+}
+
+/**
+ * React Query hook to get active job listings
+ */
+export function useJobListingsQuery() {
+  return useQuery({
+    queryKey: queryKeys.jobListings,
+    queryFn: () => getJobListings(),
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }

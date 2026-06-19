@@ -11,6 +11,7 @@ import VideoSection from "@/components/VideoSection";
 import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
+import CareersSection from "@/components/CareersSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -39,6 +40,7 @@ const Index = () => {
       {/* <PricingSection /> */}
       <TestimonialsSection />
       <BlogSection />
+      <CareersSection />
       <CTASection />
       <Footer />
     </motion.main>

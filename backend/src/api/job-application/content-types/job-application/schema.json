@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Job Application",
+    "description": "Applications submitted through the careers page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "full_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "cover_letter": {
+      "type": "text",
+      "required": true
+    },
+    "portfolio_url": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["new", "reviewing", "shortlisted", "rejected", "hired"],
+      "default": "new"
+    },
+    "job_listing": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-listing.job-listing",
+      "inversedBy": "applications"
+    }
+  }
+}

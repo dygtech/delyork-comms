@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -8,6 +8,7 @@ const navItems = [
   { label: "The Work", href: "#portfolio" },
   { label: "The Thinking", href: "#services" },
   { label: "The Connect", href: "#connect" },
+  { label: "Careers", href: "/careers", isPage: true },
 ];
 
 const Navbar = () => {
@@ -104,6 +105,21 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
+            if ((item as any).isPage) {
+              return (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className={`transition-colors font-body text-sm flex items-center gap-1 ${
+                    location.pathname === item.href
+                      ? "text-primary font-bold"
+                      : "text-foreground/80 hover:text-primary"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
             const isActive = isHomePage && activeSection === item.href.slice(1);
             return (
               <a
@@ -111,8 +127,8 @@ const Navbar = () => {
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 className={`transition-colors font-body text-sm flex items-center gap-1 ${
-                  isActive 
-                    ? "text-primary font-bold" 
+                  isActive
+                    ? "text-primary font-bold"
                     : "text-foreground/80 hover:text-primary"
                 }`}
               >
@@ -153,6 +169,22 @@ const Navbar = () => {
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => {
+                if ((item as any).isPage) {
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`text-sm font-body transition-colors ${
+                        location.pathname === item.href
+                          ? "text-primary font-bold"
+                          : "text-foreground/80"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
                 const isActive = isHomePage && activeSection === item.href.slice(1);
                 return (
                   <a
@@ -160,8 +192,8 @@ const Navbar = () => {
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`text-sm font-body transition-colors ${
-                      isActive 
-                        ? "text-primary font-bold" 
+                      isActive
+                        ? "text-primary font-bold"
                         : "text-foreground/80"
                     }`}
                   >
