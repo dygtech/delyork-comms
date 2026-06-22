@@ -6,8 +6,8 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Our Company", href: "#about" },
   { label: "Our Work", href: "#portfolio" },
-  { label: "Our Thinking", href: "#services" },
-  { label: "Our Connect", href: "#connect" },
+  { label: "Our Strategy", href: "#services" },
+  { label: "Our Partners", href: "#partners" },
   { label: "Careers", href: "/careers", isPage: true },
 ];
 
@@ -22,7 +22,7 @@ const Navbar = () => {
   useEffect(() => {
     if (!isHomePage) return;
 
-    const sections = ["about", "portfolio", "services", "connect"];
+    const sections = ["about", "portfolio", "services", "partners"];
 
     const observerOptions = {
       root: null,
@@ -111,8 +111,8 @@ const Navbar = () => {
                   key={item.label}
                   to={item.href}
                   className={`transition-colors font-body text-sm flex items-center gap-1 ${location.pathname === item.href
-                      ? "text-primary font-bold"
-                      : "text-foreground/80 hover:text-primary"
+                    ? "text-primary font-bold"
+                    : "text-foreground/80 hover:text-primary"
                     }`}
                 >
                   {item.label}
@@ -126,8 +126,8 @@ const Navbar = () => {
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 className={`transition-colors font-body text-sm flex items-center gap-1 ${isActive
-                    ? "text-primary font-bold"
-                    : "text-foreground/80 hover:text-primary"
+                  ? "text-primary font-bold"
+                  : "text-foreground/80 hover:text-primary"
                   }`}
               >
                 {item.label}
@@ -139,8 +139,8 @@ const Navbar = () => {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="#connect"
-            onClick={(e) => handleNavClick(e, "#connect")}
+            href="#partners"
+            onClick={(e) => handleNavClick(e, "#partners")}
             className="bg-secondary text-foreground px-6 py-2.5 rounded-full text-sm font-body hover:bg-primary hover:text-primary-foreground transition-all"
           >
             Let's Talk
@@ -174,8 +174,8 @@ const Navbar = () => {
                       to={item.href}
                       onClick={() => setMobileOpen(false)}
                       className={`text-sm font-body transition-colors ${location.pathname === item.href
-                          ? "text-primary font-bold"
-                          : "text-foreground/80"
+                        ? "text-primary font-bold"
+                        : "text-foreground/80"
                         }`}
                     >
                       {item.label}
@@ -189,8 +189,8 @@ const Navbar = () => {
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`text-sm font-body transition-colors ${isActive
-                        ? "text-primary font-bold"
-                        : "text-foreground/80"
+                      ? "text-primary font-bold"
+                      : "text-foreground/80"
                       }`}
                   >
                     {item.label}
@@ -198,8 +198,8 @@ const Navbar = () => {
                 );
               })}
               <a
-                href="#connect"
-                onClick={(e) => handleNavClick(e, "#connect")}
+                href="#partners"
+                onClick={(e) => handleNavClick(e, "#partners")}
                 className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-body text-center"
               >
                 Let's Talk
