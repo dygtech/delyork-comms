@@ -5,6 +5,8 @@ import EventsImg from "@/assets/01-events-and-execution-banner.webp";
 import StratCommImg from "@/assets/02-strategic-communications-banner.webp";
 import PartnershipImg from "@/assets/03-partnership-engagement-banner.webp";
 import ProjectMgmtImg from "@/assets/04-project-management-banner.webp";
+import BrandingImg from "@/assets/05-branding-banner.webp";
+import VideoImg from "@/assets/06-video-production-banner.webp";
 
 const services = [
   {
@@ -48,6 +50,24 @@ const services = [
     tags: ["PMO delivery", "Vendor management", "Risk and reporting"],
     color: "#5D3F1E", // Brown
     image: ProjectMgmtImg,
+  },
+  {
+    id: "branding",
+    num: "05",
+    title: "Branding",
+    description: "A strong brand is how you show up. Consistency in voice. Clarity in purpose. Cohesion across every touchpoint.",
+    tags: ["Brand Strategy", "Visual Identity", "Brand Architecture"],
+    color: "#9B1D1D", // Red
+    image: BrandingImg,
+  },
+  {
+    id: "video-production",
+    num: "06",
+    title: "Video Production",
+    description: "From conceptualising the big idea to final cut. We script, shoot, edit, and deliver finished videos that bring ideas to life.",
+    tags: ["Video Editing", "Videography", "Content Creation"],
+    color: "#4F46B9", // Purple
+    image: VideoImg,
   },
 ];
 
