@@ -37,7 +37,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Rotating badge */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -58,7 +58,7 @@ const HeroSection = () => {
               <img src={dyPreloader} alt="dyc logo" className="w-18 h-18" />
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Stats + Description row */}
         <motion.div
