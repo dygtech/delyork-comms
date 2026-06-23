@@ -16,8 +16,26 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const timer = setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, [location.hash]);
   return (
     <motion.main
       initial={{ opacity: 0, y: 20 }}
@@ -30,9 +48,9 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <MarqueeStrip />
+      <StatsNarrativeSection />
       <PortfolioSection />
       <AboutSection />
-      <StatsNarrativeSection />
       <ServicesSection />
       {/* <ProjectMarquee /> */}
       <ClientsSection />

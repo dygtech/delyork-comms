@@ -93,43 +93,43 @@ const PortfolioSection = () => {
   return (
     <>
       <section id="portfolio" className="py-20 lg:py-32 bg-background relative">
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
+        <div className="container mx-auto px-6">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="font-heading text-5xl md:text-7xl lg:text-8xl font-medium leading-[0.9] tracking-tight uppercase"
+              >
+                Our<br />Work
+              </motion.h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="font-heading text-5xl md:text-7xl lg:text-8xl font-medium leading-[0.9] tracking-tight uppercase"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="pb-2"
             >
-              Selected<br />Work
-            </motion.h2>
+              <Link
+                to="/works"
+                className="inline-flex items-center gap-2 text-foreground font-body text-base md:text-lg border-b border-foreground pb-1 hover:opacity-70 transition-opacity"
+              >
+                See all case studies &rarr;
+              </Link>
+            </motion.div>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="pb-2"
-          >
-            <Link
-              to="/works"
-              className="inline-flex items-center gap-2 text-foreground font-body text-base md:text-lg border-b border-foreground pb-1 hover:opacity-70 transition-opacity"
-            >
-              See all case studies &rarr;
-            </Link>
-          </motion.div>
-        </div>
 
-        {/* Tiles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
+          {/* Tiles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+            {projects.map((project, index) => (
+              <ProjectCard key={index} project={project} index={index} />
+            ))}
+          </div>
         </div>
-      </div>
       </section>
 
     </>

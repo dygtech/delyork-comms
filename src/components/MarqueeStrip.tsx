@@ -74,7 +74,7 @@ const MarqueeStrip = () => {
           <div key={idx} className="flex items-center">
             {items.map((item, i) => (
               <div key={i} className="flex items-center gap-6 mx-4 flex-shrink-0">
-                <span className="font-heading font-bold text-white text-lg md:text-xl uppercase">
+                <span className="font-body font-bold text-white text-lg md:text-xl uppercase">
                   {item}
                 </span>
                 <div className="h-5 w-[1px] bg-white ml-2" />

@@ -12,7 +12,7 @@ const services = [
   {
     id: "events",
     num: "01",
-    title: "Events and Execution",
+    title: "Experiental and Corporate Events",
     description: "Ministerial summits. Galas. Product launches. Exhibitions. Job fairs. We handle it end-to-end and make it look easy.",
     tags: ["Multi-day summits", "Gala dinners", "Exhibitions"],
     color: "#9B1D1D", // Red
@@ -21,9 +21,9 @@ const services = [
   {
     id: "strat-comm",
     num: "02",
-    title: "Strategic Communications",
-    description: "Narratives that hold up under pressure. Media relations, executive messaging, digital strategy, reputation management.",
-    tags: ["Media relations", "PR", "Reputation mgmt"],
+    title: "Creative Economy Communications",
+    description: "Building Africa's Creative Future. This offering positions DYC as the communications leader for Africa's creative industries.",
+    tags: ["Creative Economy Positioning", "Policy Advocacy", "Sector Branding", "International Partnerships", "Creative Economy Summits"],
     color: "#1E5D48", // Green
     image: StratCommImg,
     subServices: [
@@ -180,9 +180,9 @@ const ServicesSection = () => {
             <Asterisk className="w-5 h-5 text-primary" />
           </div>
           <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Four <span className="text-primary">things</span> we do.
+            <span className="text-primary">What</span> we do.
             <br />
-            One team that <span className="text-primary italic">delivers.</span>
+            One team that <span className="text-primary">delivers.</span>
           </h2>
           <p className="text-foreground/60 text-lg md:text-xl mt-6 max-w-2xl mx-auto font-body">
             We're a team of problem-solvers, storytellers, and innovators united by a simple mission:

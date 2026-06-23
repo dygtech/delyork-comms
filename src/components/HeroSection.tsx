@@ -37,7 +37,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Rotating badge */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -58,7 +58,7 @@ const HeroSection = () => {
               <img src={dyPreloader} alt="dyc logo" className="w-18 h-18" />
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Stats + Description row */}
         <motion.div
@@ -70,7 +70,7 @@ const HeroSection = () => {
           {/* Left stat */}
           <div className="flex-shrink-0 group cursor-default">
             <div className="flex items-end gap-1">
-              <span className="font-heading text-5xl md:text-6xl font-bold text-primary transition-transform duration-500 group-hover:scale-110 block">30</span>
+              <span className="font-heading text-5xl md:text-6xl font-bold text-primary transition-transform duration-500 group-hover:scale-110 block">40</span>
               <span className="font-heading text-3xl font-bold text-primary mb-2">+</span>
             </div>
             <p className="text-foreground/80 text-sm mt-1 uppercase tracking-widest font-medium">Projects Delivered</p>
