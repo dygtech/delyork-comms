@@ -139,8 +139,8 @@ const Navbar = () => {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="#partners"
-            onClick={(e) => handleNavClick(e, "#partners")}
+            href="#connect"
+            onClick={(e) => handleNavClick(e, "#connect")}
             className="bg-secondary text-foreground px-6 py-2.5 rounded-full text-sm font-body hover:bg-primary hover:text-primary-foreground transition-all"
           >
             Let's Talk
@@ -198,8 +198,8 @@ const Navbar = () => {
                 );
               })}
               <a
-                href="#partners"
-                onClick={(e) => handleNavClick(e, "#partners")}
+                href="#connect"
+                onClick={(e) => handleNavClick(e, "#connect")}
                 className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-body text-center"
               >
                 Let's Talk

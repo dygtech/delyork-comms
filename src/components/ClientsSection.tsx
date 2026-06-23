@@ -27,30 +27,30 @@ import uba from "../assets/clients/uba.jpg";
 import yappi from "../assets/clients/yappi.jpg";
 
 const clients = [
+  { name: "Mastercard", src: mastercard },
+  { name: "Islamic Development Bank", src: isdb },
+  { name: "Lagos State Government", src: lasg },
+  { name: "Ogun State Government", src: ogsg },
+  { name: "NNPC", src: nnpc },
+  { name: "MAN", src: man },
+  { name: "Dangote", src: dangote },
+  { name: "GAC Motors", src: gacMotors },
+  { name: "YAPPI", src: yappi },
+  { name: "UBA", src: uba },
   { name: "BellaNaija", src: bellaNaija },
   { name: "Bank of Industry", src: boi },
   { name: "Canon", src: canon },
   { name: "CNN", src: cnn },
-  { name: "Dangote", src: dangote },
   { name: "DSTV", src: dstv },
-  { name: "GAC Motors", src: gacMotors },
   { name: "Gionee", src: gionee },
   { name: "Gree", src: gree },
-  { name: "Islamic Development Bank", src: isdb },
-  { name: "Lagos State Government", src: lasg },
   { name: "Lontor", src: lontor },
   { name: "LSETF", src: lsetf },
-  { name: "MAN", src: man },
-  { name: "Mastercard", src: mastercard },
-  { name: "NNPC", src: nnpc },
-  { name: "Ogun State Government", src: ogsg },
   { name: "Pepsi", src: pepsi },
   { name: "Swypa", src: swypa },
   { name: "Tabs Connect", src: tabsConnect },
   { name: "Tecno", src: tecno },
   { name: "Tribeca", src: tribeca },
-  { name: "UBA", src: uba },
-  { name: "YAPPI", src: yappi }
 ];
 
 const ClientLogo = ({ src, name, index }: { src: string; name: string; index: number }) => {
@@ -73,7 +73,7 @@ const ClientLogo = ({ src, name, index }: { src: string; name: string; index: nu
 
 const ClientsSection = () => {
   return (
-    <section className="py-24 lg:py-40 bg-white overflow-hidden">
+    <section id="partners" className="py-24 lg:py-40 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -86,7 +86,7 @@ const ClientsSection = () => {
             <span className="text-black/60 text-sm uppercase tracking-[0.3em] font-bold font-body">Our Network</span>
           </div>
           <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-none tracking-tight text-black">
-            The <span className="text-primary italic">brands & institutions</span> <br className="hidden md:block" />
+            The <span className="text-primary">brands & institutions</span> <br className="hidden md:block" />
             that trust us.
           </h2>
         </motion.div>
