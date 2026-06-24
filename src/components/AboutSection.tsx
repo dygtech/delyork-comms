@@ -3,7 +3,7 @@ import { Asterisk } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 lg:py-32 bg-background relative overflow-hidden">
+    <section id="strategy" className="py-20 lg:py-32 bg-white text-black relative overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Subtitle */}
         <motion.div
@@ -13,7 +13,7 @@ const AboutSection = () => {
           className="flex items-center gap-2 mb-4"
         >
           <Asterisk className="w-5 h-5 text-primary" />
-          <span className="text-foreground/60 text-sm uppercase tracking-widest font-body">We do the work for you</span>
+          <span className="text-black text-sm uppercase tracking-widest font-body">We do the work for you</span>
         </motion.div>
 
         <div className="w-full">
@@ -74,7 +74,7 @@ const AboutSection = () => {
                     <h3 className="font-heading text-xl md:text-2xl font-bold leading-tight group-hover:text-primary transition-colors duration-300">
                       {item.title}
                     </h3>
-                    <p className="text-foreground/60 text-sm md:text-base leading-relaxed max-w-sm group-hover:text-foreground/80 transition-colors duration-300">
+                    <p className="text-sm md:text-base leading-relaxed max-w-sm group-hover:text-primary transition-colors duration-300">
                       {item.desc}
                     </p>
                   </div>

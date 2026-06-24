@@ -50,7 +50,7 @@ const Counter = ({ value, suffix, label }: { value: number; suffix: string; labe
 
 const StatsNarrativeSection = () => {
   return (
-    <section className="py-24 lg:py-40 bg-white text-black overflow-hidden border-y border-black/5">
+    <section id="about" className="py-24 lg:py-40 bg-white text-black overflow-hidden border-y border-black/5">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           {/* Left Content */}
@@ -64,7 +64,7 @@ const StatsNarrativeSection = () => {
             >
               At heart, we're...
             </motion.span>
-            
+
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
