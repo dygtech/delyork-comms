@@ -543,6 +543,95 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiJobApplicationJobApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'job_applications';
+  info: {
+    description: 'Applications submitted through the careers page';
+    displayName: 'Job Application';
+    pluralName: 'job-applications';
+    singularName: 'job-application';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    cover_letter: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    full_name: Schema.Attribute.String & Schema.Attribute.Required;
+    job_listing: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::job-listing.job-listing'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-application.job-application'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    portfolio_url: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
+      ['new', 'reviewing', 'shortlisted', 'rejected', 'hired']
+    > &
+      Schema.Attribute.DefaultTo<'new'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiJobListingJobListing extends Struct.CollectionTypeSchema {
+  collectionName: 'job_listings';
+  info: {
+    description: 'Open job positions at Del-York Communications';
+    displayName: 'Job Listing';
+    pluralName: 'job-listings';
+    singularName: 'job-listing';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applications: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-application.job-application'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    department: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    employment_type: Schema.Attribute.Enumeration<
+      ['Full-time', 'Part-time', 'Contract', 'Internship']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Full-time'>;
+    is_active: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::job-listing.job-listing'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Lagos, Nigeria'>;
+    publishedAt: Schema.Attribute.DateTime;
+    requirements: Schema.Attribute.Text;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPortfolioPortfolio extends Struct.CollectionTypeSchema {
   collectionName: 'portfolios';
   info: {
@@ -1151,6 +1240,8 @@ declare module '@strapi/strapi' {
       'api::capability.capability': ApiCapabilityCapability;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;
+      'api::job-application.job-application': ApiJobApplicationJobApplication;
+      'api::job-listing.job-listing': ApiJobListingJobListing;
       'api::portfolio.portfolio': ApiPortfolioPortfolio;
       'api::post.post': ApiPostPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
