@@ -456,7 +456,8 @@ async function runMigration(strapi: Core.Strapi) {
       'api::portfolio.portfolio.find',
       'api::portfolio.portfolio.findOne',
       'api::capability.capability.find',
-      'api::capability.capability.findOne'
+      'api::capability.capability.findOne',
+      'api::booking.booking.create'
     ];
 
     for (const action of publicActions) {

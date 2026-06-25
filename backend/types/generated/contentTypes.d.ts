@@ -543,6 +543,50 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
+  collectionName: 'bookings';
+  info: {
+    description: 'Intro meeting booking requests submitted through the website';
+    displayName: 'Booking';
+    pluralName: 'bookings';
+    singularName: 'booking';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    service_type: Schema.Attribute.Enumeration<
+      ['web_development', 'branding', 'marketing', 'consulting', 'other']
+    > &
+      Schema.Attribute.Required;
+    goals: Schema.Attribute.Text;
+    budget: Schema.Attribute.String;
+    timeline: Schema.Attribute.String;
+    scheduled_at: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    timezone: Schema.Attribute.String;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'cancelled', 'completed']
+    > &
+      Schema.Attribute.DefaultTo<'pending'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::booking.booking'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiJobApplicationJobApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'job_applications';
@@ -1237,6 +1281,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::booking.booking': ApiBookingBooking;
       'api::capability.capability': ApiCapabilityCapability;
       'api::category.category': ApiCategoryCategory;
       'api::comment.comment': ApiCommentComment;

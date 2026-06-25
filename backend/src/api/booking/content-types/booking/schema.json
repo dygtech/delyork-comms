@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "singularName": "booking",
+    "pluralName": "bookings",
+    "displayName": "Booking",
+    "description": "Intro meeting booking requests submitted through the website"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "service_type": {
+      "type": "enumeration",
+      "enum": [
+        "web_development",
+        "branding",
+        "marketing",
+        "consulting",
+        "other"
+      ],
+      "required": true
+    },
+    "goals": {
+      "type": "text"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "timeline": {
+      "type": "string"
+    },
+    "scheduled_at": {
+      "type": "datetime",
+      "required": true
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "confirmed", "cancelled", "completed"],
+      "default": "pending"
+    }
+  }
+}
