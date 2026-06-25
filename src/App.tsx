@@ -14,6 +14,7 @@ import Careers from "./pages/Careers.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop";
 import { CustomCursor } from "./components/CustomCursor";
+import { IntroCallWidget } from "./components/BookIntroCall/IntroCallWidget";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => {
         <Sonner />
         <ScrollToTop />
         <CustomCursor />
+        <IntroCallWidget />
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Index />} />
