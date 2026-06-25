@@ -57,10 +57,10 @@ const BlogSection = () => {
     const rawDate = item.publish_date || item.publishedAt;
     const postDate = rawDate
       ? new Date(rawDate).toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
       : "September 23, 2025";
 
     let fallbackImg = blog1;
@@ -167,11 +167,10 @@ const BlogSection = () => {
                         setVisibleCount(6);
                         if (scrollRef.current) scrollRef.current.scrollTop = 0;
                       }}
-                      className={`px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all border ${
-                        filterCategory === cat
+                      className={`px-6 py-2.5 rounded-full text-xs font-medium font-mono uppercase tracking-wider transition-all border ${filterCategory === cat
                           ? "bg-[#a40000] border-[#a40000] text-white shadow-lg shadow-[#a40000]/25"
                           : "bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
-                      }`}
+                        }`}
                     >
                       {cat}
                     </button>
@@ -284,7 +283,7 @@ const BlogSection = () => {
             </div>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold">
               Learn From Journal Insight{" "}
-              <span className="text-primary italic">Of DYC</span>
+              <span className="text-primary">Of DYC</span>
             </h2>
             <p className="text-foreground/60 text-sm mt-4 max-w-xl mx-auto font-body">
               At our Creative Digital Agency, we bring your ideas to life by crafting engaging and impactful digital experiences that captivate global audiences.
