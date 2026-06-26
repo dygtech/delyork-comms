@@ -8,9 +8,14 @@
         "@_sh/strapi-plugin-ckeditor": "^7.1.1",
         "@strapi/plugin-cloud": "5.46.0",
         "@strapi/plugin-users-permissions": "5.46.0",
+        "@strapi/provider-email-nodemailer": "^5.49.0",
         "@strapi/strapi": "5.46.0",
         "dotenv": "^17.4.2",
         "pg": "8.20.0",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "react-router-dom": "^6.0.0",
+        "styled-components": "^6.0.0",
       },
       "devDependencies": {
         "@types/node": "^20",
@@ -696,6 +701,8 @@
     "@strapi/plugin-cloud": ["@strapi/plugin-cloud@5.46.0", "", { "dependencies": { "@strapi/design-system": "2.2.0", "@strapi/icons": "2.2.0", "react-intl": "6.6.2" }, "peerDependencies": { "@strapi/admin": "^5.0.0", "@strapi/strapi": "^5.0.0", "react": "^17.0.0 || ^18.0.0", "react-dom": "^17.0.0 || ^18.0.0", "react-router-dom": "^6.30.3", "styled-components": "^6.0.0" } }, "sha512-vZEAkzlLvmtZ/Ha7o2V0ay8VwMN0hun+mb/7Muen0DeEZiVUT6p1pf0QPOMYGJbIvjnkF5ad9zl0K7+Rcj9ArA=="],
 
     "@strapi/plugin-users-permissions": ["@strapi/plugin-users-permissions@5.46.0", "", { "dependencies": { "@strapi/design-system": "2.2.0", "@strapi/icons": "2.2.0", "@strapi/utils": "5.46.0", "bcryptjs": "2.4.3", "formik": "2.4.5", "grant": "5.4.24", "immer": "9.0.21", "jsonwebtoken": "9.0.0", "jwk-to-pem": "2.0.7", "koa": "2.16.4", "koa2-ratelimit": "^1.1.3", "lodash": "4.18.1", "prop-types": "^15.8.1", "purest": "4.0.2", "react-intl": "6.6.2", "react-query": "3.39.3", "react-redux": "8.1.3", "url-join": "4.0.1", "yup": "0.32.9", "zod": "3.25.67" }, "peerDependencies": { "@strapi/strapi": "^5.0.0", "react": "^17.0.0 || ^18.0.0", "react-dom": "^17.0.0 || ^18.0.0", "react-router-dom": "^6.30.3", "styled-components": "^6.0.0" } }, "sha512-y0uFoPMKtrbnKazjJbwZF68YtglqEjgAouRa/1x+ONZ0Ar7/R5vHnCkb8OPKXq85sLtvtZFk7FbpIyUA9oyjTw=="],
+
+    "@strapi/provider-email-nodemailer": ["@strapi/provider-email-nodemailer@5.49.0", "", { "dependencies": { "nodemailer": "8.0.9" } }, "sha512-X1dRQ1ry9M9H0yEqCLZoeC8VTFPiKkL0T7Ht34sGJnYaWdmRwjt2p90dKn1seB85Qov6EnsXGMIXilXejW8NZQ=="],
 
     "@strapi/provider-email-sendmail": ["@strapi/provider-email-sendmail@5.46.0", "", { "dependencies": { "nodemailer": "8.0.5" } }, "sha512-9s5Sy5pNMwhMooGh49Wec0pytqaI9RNqS4J0nQKQ//5cllCyxpeDroqNc8E8B1Q5zxEAu5nQevki2NmpBf/9rg=="],
 
@@ -2019,7 +2026,7 @@
 
     "node-schedule": ["node-schedule@2.1.1", "", { "dependencies": { "cron-parser": "^4.2.0", "long-timeout": "0.1.1", "sorted-array-functions": "^1.3.0" } }, "sha512-OXdegQq03OmXEjt2hZP33W2YPs/E5BcFQks46+G2gAxs4gHOIVD1u7EqlYLYSKsaIpyKCK9Gbk0ta1/gjRSMRQ=="],
 
-    "nodemailer": ["nodemailer@8.0.5", "", {}, "sha512-0PF8Yb1yZuQfQbq+5/pZJrtF6WQcjTd5/S4JOHs9PGFxuTqoB/icwuB44pOdURHJbRKX1PPoJZtY7R4VUoCC8w=="],
+    "nodemailer": ["nodemailer@8.0.9", "", {}, "sha512-5ofa7BUN8+C+Hckh5V2GjeeOGRQBx0CJQA6KxrvuZfC8iU4/q7sLn8XrtEEhJkjV6HdyIiQs7Bba6bTao8JhkA=="],
 
     "nodemon": ["nodemon@3.0.2", "", { "dependencies": { "chokidar": "^3.5.2", "debug": "^4", "ignore-by-default": "^1.0.1", "minimatch": "^3.1.2", "pstree.remy": "^1.1.8", "semver": "^7.5.3", "simple-update-notifier": "^2.0.0", "supports-color": "^5.5.0", "touch": "^3.1.0", "undefsafe": "^2.0.5" }, "bin": { "nodemon": "bin/nodemon.js" } }, "sha512-9qIN2LNTrEzpOPBaWHTm4Asy1LxXLSickZStAQ4IZe7zsoIpD/A7LWxhZV3t4Zu352uBcqVnRsDXSMR2Sc3lTA=="],
 
@@ -2836,6 +2843,8 @@
     "@strapi/permissions/lodash": ["lodash@4.18.1", "", {}, "sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q=="],
 
     "@strapi/plugin-users-permissions/lodash": ["lodash@4.18.1", "", {}, "sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q=="],
+
+    "@strapi/provider-email-sendmail/nodemailer": ["nodemailer@8.0.5", "", {}, "sha512-0PF8Yb1yZuQfQbq+5/pZJrtF6WQcjTd5/S4JOHs9PGFxuTqoB/icwuB44pOdURHJbRKX1PPoJZtY7R4VUoCC8w=="],
 
     "@strapi/strapi/dotenv": ["dotenv@16.6.1", "", {}, "sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow=="],
 
