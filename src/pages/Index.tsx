@@ -4,6 +4,7 @@ import MarqueeStrip from "@/components/MarqueeStrip";
 import AboutSection from "@/components/AboutSection";
 import StatsNarrativeSection from "@/components/StatsNarrativeSection";
 import WhatWeDoSection from "@/components/WhatWeDoSection";
+import ComparisonSection from "@/components/ComparisonSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProjectMarquee from "@/components/ProjectMarquee";
 import PortfolioSection from "@/components/PortfolioSection";
@@ -53,6 +54,7 @@ const Index = () => {
       <PortfolioSection />
       {/* <AboutSection /> */}
       <WhatWeDoSection />
+      <ComparisonSection />
       <ServicesSection />
       {/* <ProjectMarquee /> */}
       <ClientsSection />
