@@ -175,18 +175,12 @@ const ServicesSection = () => {
           className="text-center mb-20"
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Asterisk className="w-5 h-5 text-primary" />
-            <span className="text-foreground/60 text-sm uppercase tracking-widest font-body font-semibold">Our Expertise</span>
-            <Asterisk className="w-5 h-5 text-primary" />
           </div>
-          <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            <span className="text-primary">What</span> we do.
-            <br />
-            One team that <span className="text-primary">delivers.</span>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight uppercase tracking-tight">
+            Delivery Capabilities
           </h2>
-          <p className="text-foreground/60 text-lg md:text-xl mt-6 max-w-2xl mx-auto font-body">
-            We're a team of problem-solvers, storytellers, and innovators united by a simple mission:
-            to create work that matters, work that moves the needle.
+          <p className="text-foreground/60 text-lg md:text-xl mt-6 max-w-2xl mx-auto font-body text-balance">
+            The following services become delivery engines supporting our strategic products. They are no longer sold as standalone products but integrated into larger strategic engagements.
           </p>
         </motion.div>
 
