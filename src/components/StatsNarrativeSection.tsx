@@ -55,7 +55,7 @@ const StatsNarrativeSection = () => {
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           {/* Left Content */}
           <div className="lg:w-7/12">
-            <motion.span
+            {/* <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -63,16 +63,16 @@ const StatsNarrativeSection = () => {
               className="text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold text-black/40 mb-6 block"
             >
               At heart, we're...
-            </motion.span>
+            </motion.span> */}
 
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-8"
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-balance"
             >
-              Storytellers who <br className="hidden md:block" /> get stuff done.
+              We shape perception, influence decisions and build the future.
             </motion.h2>
 
             <motion.p
@@ -80,10 +80,25 @@ const StatsNarrativeSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-black/70 text-lg md:text-xl leading-relaxed max-w-2xl mb-12 font-body"
+              className="text-black/70 text-lg md:text-xl leading-relaxed max-w-2xl mb-8 font-body"
             >
-              Making complex things legible, turning audiences into believers, translating institutional mandates into movements - that's what makes us tick. We're great at it, if we dare say so ourselves. Our clients know. Now you do too.
+              <strong>Del-York Communications (DYC)</strong> is Africa's Strategic Communications, Influence and AI Creative Transformation Company. We help governments, institutions, corporations and leaders shape reputation, build influence, attract investment and drive transformation.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-12"
+            >
+              <a href="/about" className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-bold border-b border-black pb-1 hover:text-black/60 hover:border-black/60 transition-colors">
+                Discover Our Story 
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
