@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Our Company", href: "#about" },
+  { label: "Our Company", href: "/about", isPage: true },
   { label: "Our Work", href: "/works", isPage: true },
   { label: "Our Strategy", href: "#strategy" },
   { label: "Our Services", href: "#services" },
@@ -23,7 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     if (!isHomePage) return;
 
-    const sections = ["about", "portfolio", "strategy", "services", "partners"];
+    const sections = ["portfolio", "strategy", "services", "partners"];
 
     const observerOptions = {
       root: null,

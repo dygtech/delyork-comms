@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Asterisk, X, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import EventsImg from "@/assets/01-events-and-execution-banner.webp";
 import StratCommImg from "@/assets/02-strategic-communications-banner.webp";
 import PartnershipImg from "@/assets/03-partnership-engagement-banner.webp";
@@ -201,6 +202,25 @@ const ServicesSection = () => {
             );
           })}
         </div>
+
+        {/* See All CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 flex flex-col items-center gap-4 text-center"
+        >
+          <p className="text-foreground/40 text-sm font-body uppercase tracking-widest">
+            Showing 6 of 16 delivery capabilities
+          </p>
+          <Link
+            to="/about#delivery-capabilities"
+            className="group inline-flex items-center gap-3 border border-foreground/20 hover:border-primary text-foreground/60 hover:text-primary px-8 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300"
+          >
+            See All 16 Capabilities
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
 
       {/* Full Bleed Modal */}

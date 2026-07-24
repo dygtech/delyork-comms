@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index.tsx";
+import About from "./pages/About.tsx";
 import Work from "./pages/Work.tsx";
 import WorksList from "./pages/WorksList.tsx";
 import BlogDetail from "./pages/BlogDetail.tsx";
@@ -55,6 +56,7 @@ const App = () => {
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
             <Route path="/works" element={<WorksList />} />
             <Route path="/work/:slug" element={<Work />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />

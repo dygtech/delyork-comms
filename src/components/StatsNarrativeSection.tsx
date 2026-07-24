@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const stats = [
   { label: "Years delivering", value: 15, suffix: "+" },
@@ -50,7 +51,7 @@ const Counter = ({ value, suffix, label }: { value: number; suffix: string; labe
 
 const StatsNarrativeSection = () => {
   return (
-    <section id="about" className="py-24 lg:py-40 bg-white text-black overflow-hidden border-y border-black/5">
+    <section className="py-24 lg:py-40 bg-white text-black overflow-hidden border-y border-black/5">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           {/* Left Content */}
@@ -92,12 +93,12 @@ const StatsNarrativeSection = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mb-12"
             >
-              <a href="/about" className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-bold border-b border-black pb-1 hover:text-black/60 hover:border-black/60 transition-colors">
-                Discover Our Story 
+              <Link to="/about" className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-bold border-b border-black pb-1 hover:text-black/60 hover:border-black/60 transition-colors">
+                Discover Our Story
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </Link>
             </motion.div>
 
             <motion.div

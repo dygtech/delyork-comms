@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Asterisk } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // The 7 flagship products from the document
 const products = [
@@ -104,12 +105,12 @@ const WhatWeDoSection = () => {
                 </motion.div>
               ))}
             </div>
-            {/* CTA to Dedicated Page */}
+            {/* CTA to About Page — Strategic Portfolio section */}
             <div className="mt-12 flex justify-center md:justify-start">
-              <a href="/solutions" className="group inline-flex items-center gap-4 bg-black dark:bg-white text-white dark:text-black px-8 py-5 rounded-full font-semibold uppercase tracking-widest text-sm hover:scale-105 transition-transform duration-300">
+              <Link to="/about#strategic-portfolio" className="group inline-flex items-center gap-4 bg-black dark:bg-white text-white dark:text-black px-8 py-5 rounded-full font-semibold uppercase tracking-widest text-sm hover:scale-105 transition-transform duration-300">
                 Explore Our Solutions
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
             </div>
           </div>
 
