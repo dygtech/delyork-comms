@@ -32,7 +32,7 @@ const HeroSection = () => {
             We are{" "} <br />
             <span className="text-primary">Del-York Communications.</span>
             <br />
-            We find the why.
+            We find the <span className="text-primary">why.</span>
           </h1>
         </motion.div>
 
@@ -61,14 +61,14 @@ const HeroSection = () => {
         </motion.div> */}
 
         {/* Stats + Description row */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mt-16 flex flex-col lg:flex-row gap-10 lg:gap-20 items-center lg:items-start"
-        >
-          {/* Left stat */}
-          <div className="flex-shrink-0 group cursor-default">
+        > */}
+        {/* Left stat */}
+        {/* <div className="flex-shrink-0 group cursor-default">
             <div className="flex items-end gap-1">
               <span className="font-heading text-5xl md:text-6xl font-bold text-primary transition-transform duration-500 group-hover:scale-110 block">40</span>
               <span className="font-heading text-3xl font-bold text-primary mb-2">+</span>
@@ -98,7 +98,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-        </motion.div>
+        </motion.div>  */}
 
       </div>
 

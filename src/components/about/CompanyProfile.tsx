@@ -33,7 +33,7 @@ const CompanyProfile = () => {
             <div className="mt-12 pt-12 border-t border-black/10 grid grid-cols-2 gap-8">
               {[
                 { label: "Years of Operation", value: "15+" },
-                { label: "Group Subsidiaries", value: "8" },
+                { label: "Projects Delivered", value: "40+" },
                 { label: "Creative Alumni Network", value: "4K+" },
                 { label: "Media Placements / Campaign", value: "40+" },
               ].map((stat) => (

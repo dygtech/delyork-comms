@@ -23,8 +23,8 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div 
-          className="relative aspect-[4/3] overflow-hidden mb-6 bg-secondary/10 cursor-none"
+        <div
+          className="relative aspect-[4/3] overflow-hidden mb-6 bg-secondary/10 cursor-none rounded-3xl"
           data-project-hover="true"
         >
           <motion.img
@@ -32,7 +32,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             src={project.img}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
             loading="lazy"
           />
         </div>

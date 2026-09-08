@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const stats = [
   { label: "Years delivering", value: 15, suffix: "+" },
   { label: "Media placements per campaign", value: 40, suffix: "+" },
-  { label: "Group subsidiaries", value: 8, suffix: "" },
+  { label: "Projects Delivered", value: 40, suffix: "+" },
   { label: "Creative alumni network", value: 4, suffix: "K+" },
 ];
 
