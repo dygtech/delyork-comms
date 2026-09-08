@@ -44,8 +44,8 @@ const TestimonialsSection = () => {
             viewport={{ once: true }}
             className="lg:w-1/3 bg-primary rounded-2xl p-8 flex flex-col items-center justify-center text-center"
           >
-            <span className="font-heading text-6xl md:text-7xl font-bold text-primary-foreground">98%</span>
-            <p className="text-primary-foreground/80 text-sm mt-4 max-w-[200px]">
+            <span className="font-heading text-6xl md:text-7xl font-bold text-white">98%</span>
+            <p className="text-white/80 text-sm mt-4 max-w-[200px]">
               We build lasting institutional relationships through consistent excellence and strategic depth.
             </p>
             <div className="flex items-center gap-3 mt-6">
@@ -56,10 +56,10 @@ const TestimonialsSection = () => {
               </div>
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-primary-foreground text-primary-foreground" />
+                  <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
                 ))}
               </div>
-              <span className="text-primary-foreground/80 text-sm font-bold">5.9K</span>
+              <span className="text-white/80 text-sm font-bold">5.9K</span>
             </div>
           </motion.div>
 
