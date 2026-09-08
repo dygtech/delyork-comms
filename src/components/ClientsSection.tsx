@@ -53,27 +53,25 @@ const clients = [
   { name: "Tribeca", src: tribeca },
 ];
 
-const ClientLogo = ({ src, name, index }: { src: string; name: string; index: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05, duration: 0.5 }}
-      className="bg-white rounded-xl p-6 h-32 md:h-40 flex items-center justify-center transition-all duration-300 hover:shadow-lg border border-gray-100"
-    >
-      <img
-        src={src}
-        alt={`${name} logo`}
-        className="max-w-full max-h-full object-contain transition-all duration-300"
-      />
-    </motion.div>
-  );
-};
-
 const ClientsSection = () => {
+  // Duplicate for seamless infinite scroll
+  const marqueeItems = [...clients, ...clients];
+
   return (
     <section id="partners" className="py-24 lg:py-40 bg-white overflow-hidden">
+      <style>{`
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-track {
+          animation: marquee-scroll 40s linear infinite;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -90,15 +88,26 @@ const ClientsSection = () => {
             that trust us.
           </h2>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {clients.map((client, idx) => (
-            <ClientLogo
+      {/* Full-width scrolling strip — outside the container so it bleeds edge-to-edge */}
+      <div className="relative w-full overflow-hidden">
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-white to-transparent" />
+
+        <div className="marquee-track flex gap-4 w-max">
+          {marqueeItems.map((client, idx) => (
+            <div
               key={idx}
-              src={client.src}
-              name={client.name}
-              index={idx}
-            />
+              className="flex-shrink-0 bg-white rounded-xl p-5 h-28 w-40 md:h-32 md:w-48 flex items-center justify-center border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+            >
+              <img
+                src={client.src}
+                alt={`${client.name} logo`}
+                className="max-w-full max-h-full object-contain"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -107,3 +116,4 @@ const ClientsSection = () => {
 };
 
 export default ClientsSection;
+
