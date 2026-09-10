@@ -75,7 +75,7 @@ const ComparisonSection = () => {
                 </div>
 
                 {/* Left Side (Traditional) */}
-                <div className="bg-neutral-100 dark:bg-neutral-900 md:bg-transparent rounded-2xl md:rounded-none p-6 md:p-8 md:text-right flex items-center md:justify-end border border-black/5 md:border-none">
+                <div className="md:bg-transparent rounded-2xl md:rounded-none p-6 md:p-8 md:text-right flex items-center md:justify-end border border-black/5 md:border-none">
                   <div className="flex items-start gap-4 md:flex-row-reverse w-full md:w-auto">
                     <div className="w-6 h-6 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 mt-1 md:mt-0">
                       <X className="w-3 h-3 text-foreground/40" />
@@ -95,7 +95,7 @@ const ComparisonSection = () => {
                 </div>
 
                 {/* Right Side (DYC) */}
-                <div className="bg-white dark:bg-neutral-950 md:bg-transparent rounded-2xl md:rounded-none p-6 md:p-8 flex items-center shadow-lg md:shadow-none border border-black/5 md:border-none relative z-10 md:z-auto">
+                <div className="md:bg-transparent rounded-2xl md:rounded-none p-6 md:p-8 flex items-center shadow-lg md:shadow-none border border-black/5 md:border-none relative z-10 md:z-auto">
                   <div className="flex items-start gap-4 w-full md:w-auto">
                     <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-1 md:mt-0">
                       <Check className="w-4 h-4 text-primary" />
