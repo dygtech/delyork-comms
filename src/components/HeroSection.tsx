@@ -1,40 +1,28 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Star } from "lucide-react";
-import heroTeam from "@/assets/hero-team.jpg";
-import dyPreloader from '@/assets/dyc-logo.gif';
-import landingHero from '@/assets/landing-page-hero.webp';
+import heroVideo from "@/assets/video/dyc_hero.mp4";
 
 const HeroSection = () => {
 
   return (
     <section className="min-h-screen relative overflow-hidden flex items-center bg-background">
-      {/* Image Background Layer */}
+      {/* Video Background Layer */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={landingHero}
-          alt="Hero background"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
-        />
-        {/* Refined Overlay - more transparent to let the image through */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20" />
+        >
+          <source src={heroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Subtle overlay for contrast with scroll indicator */}
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 py-20">
-        {/* Large heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mt-12 lg:mt-20"
-        >
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-[6.5rem] font-bold leading-[0.95] tracking-tight">
-            We are{" "} <br />
-            <span className="text-primary">Del-York Communications.</span>
-            <br />
-            We find the <span className="text-primary">why.</span>
-          </h1>
-        </motion.div>
 
         {/* Rotating badge */}
         {/* <motion.div
@@ -103,7 +91,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator - moved outside container to stay at bottom of section */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
@@ -117,7 +105,7 @@ const HeroSection = () => {
             className="absolute top-0 left-0 w-full h-1/3 bg-white"
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 };
