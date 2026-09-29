@@ -1,20 +1,11 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import MarqueeStrip from "@/components/MarqueeStrip";
-import AboutSection from "@/components/AboutSection";
-import StatsNarrativeSection from "@/components/StatsNarrativeSection";
-import WhatWeDoSection from "@/components/WhatWeDoSection";
-import ComparisonSection from "@/components/ComparisonSection";
+import LatestQuestsSection from "@/components/LatestQuestsSection";
 import ServicesSection from "@/components/ServicesSection";
-import ProjectMarquee from "@/components/ProjectMarquee";
 import PortfolioSection from "@/components/PortfolioSection";
-import ClientsSection from "@/components/ClientsSection";
-import VideoSection from "@/components/VideoSection";
-import PricingSection from "@/components/PricingSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import BlogSection from "@/components/BlogSection";
-import CareersSection from "@/components/CareersSection";
-import CTASection from "@/components/CTASection";
+import WhatWeOfferSection from "@/components/WhatWeOfferSection";
+import ComparisonSection from "@/components/ComparisonSection";
+import WorkWithUsSection from "@/components/WorkWithUsSection";
 import Footer from "@/components/Footer";
 
 import { motion } from "framer-motion";
@@ -38,35 +29,27 @@ const Index = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
   }, [location.hash]);
+
   return (
     <motion.main
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
-      className="bg-background text-foreground min-h-screen"
+      className="bg-[#0A0A0A] text-white min-h-screen"
     >
-      {/* <Preloader /> */}
       <Navbar />
       <HeroSection />
-      <MarqueeStrip />
-      <StatsNarrativeSection />
-      <PortfolioSection />
-      {/* <AboutSection /> */}
-      <WhatWeDoSection />
-      <ComparisonSection />
+      <LatestQuestsSection />
       <ServicesSection />
-      {/* <ProjectMarquee /> */}
-      <ClientsSection />
-      {/* <VideoSection /> */}
-      {/* <PricingSection /> */}
-      <TestimonialsSection />
-      <BlogSection />
-      <CareersSection />
-      <CTASection />
+      <PortfolioSection />
+      <WhatWeOfferSection />
+      <ComparisonSection />
+      <WorkWithUsSection />
       <Footer />
     </motion.main>
   );
 };
 
 export default Index;
+
