@@ -1,4 +1,4 @@
-export const BACKEND_URL = import.meta.env.VITE_API_URL || "https://stable-cherry-68f716b8e6.strapiapp.com";
+export const BACKEND_URL = import.meta.env.VITE_API_URL || "https://delyork-comms-backend-h7ccu.ondigitalocean.app";
 
 export interface StrapiPortfolio {
   id: number;
