@@ -1,6 +1,34 @@
 import type { Core } from '@strapi/strapi';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin => ({
+  // ── DigitalOcean Spaces upload (S3-compatible) ──
+  upload: {
+    config: {
+      provider: 'aws-s3',
+      providerOptions: {
+        baseUrl: `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.digitaloceanspaces.com`,
+        s3Options: {
+          credentials: {
+            accessKeyId: env('DO_SPACE_ACCESS_KEY'),
+            secretAccessKey: env('DO_SPACE_SECRET_KEY'),
+          },
+          endpoint: `https://${env('DO_SPACE_REGION')}.digitaloceanspaces.com`,
+          region: env('DO_SPACE_REGION'),
+          params: {
+            Bucket: env('DO_SPACE_BUCKET'),
+          },
+          forcePathStyle: false,
+        },
+      },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      },
+    },
+  },
+
+  // ── Email (Brevo / Nodemailer) ──
   email: {
     config: {
       provider: 'nodemailer',
