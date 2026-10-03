@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { usePortfoliosQuery } from "@/services/queries";
+import { getStrapiMedia } from "@/services/api";
 
 import woleSoyinka from "@/assets/wole-soyinka.jpg";
 import manEvent from "@/assets/man-event.jpg";
@@ -7,29 +9,58 @@ import isdbEvent from "@/assets/isdb-event.jpg";
 import lontorPays from "@/assets/lontorpays.jpg";
 import gacMotors from "@/assets/gac-motors.jpg";
 import gacGs4 from "@/assets/gac-gs4.jpg";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import videoThumb from "@/assets/video-thumb.jpg";
-import heroTeam from "@/assets/hero-team.jpg";
-import aboutTeam from "@/assets/about-team.jpg";
 
-const portfolioItems = [
-  { img: woleSoyinka, caption: "WOLE SOYINKA AT 90", span: "col-span-1 md:col-span-2 row-span-2" },
-  { img: manEvent, caption: "MANUFACTURERS ASSOCIATION OF NIGERIA", span: "col-span-1 row-span-1" },
-  { img: isdbEvent, caption: "IDEAS PEOPLE CULTURE CHANGE", span: "col-span-1 row-span-1" },
-  { img: lontorPays, caption: "LONTORPAYS FINTECH", span: "col-span-1 md:col-span-2 row-span-1" },
-  { img: gacMotors, caption: "STRATEGY CREATIVITY EXECUTION REAL IMPACT", span: "col-span-1 row-span-2" },
-  { img: gacGs4, caption: "PEOPLE BRANDS COMMUNITIES FOR A BOLDER TOMORROW", span: "col-span-1 md:col-span-2 row-span-1" },
-  // { img: project1, caption: "CREATIVE ECONOMY REAL PEOPLE BIGGER POSSIBILITIES", span: "col-span-1 row-span-1" },
-  // { img: project2, caption: "GOOD STORIES STRONGER BRANDS BRIGHTER AFRICA", span: "col-span-1 md:col-span-2 row-span-1" },
-  // { img: project3, caption: "CONVERSATIONS THAT MOVE CULTURE FORWARD", span: "col-span-1 row-span-1" },
-  // { img: videoThumb, caption: "CINEMATIC FILM PRODUCTION", span: "col-span-1 row-span-1" },
-  // { img: heroTeam, caption: "DYC CREATIVE ENGINE", span: "col-span-1 row-span-1" },
-  // { img: aboutTeam, caption: "EXECUTIVE MEDIA HUB", span: "col-span-1 row-span-1" },
+interface PortfolioDisplayItem {
+  img: string;
+  caption: string;
+  slug?: string;
+  span: string;
+}
+
+const defaultPortfolioItems: PortfolioDisplayItem[] = [
+  { img: woleSoyinka, caption: "WOLE SOYINKA AT 90", slug: "wole-soyinka-at-90", span: "col-span-1 md:col-span-2 row-span-2" },
+  { img: manEvent, caption: "MANUFACTURERS ASSOCIATION OF NIGERIA", slug: "man-at-50", span: "col-span-1 row-span-1" },
+  { img: isdbEvent, caption: "IDEAS PEOPLE CULTURE CHANGE", slug: "islamic-development-bank-annual-meeting", span: "col-span-1 row-span-1" },
+  { img: lontorPays, caption: "LONTORPAYS FINTECH", slug: "lontor-pays", span: "col-span-1 md:col-span-2 row-span-1" },
+  { img: gacMotors, caption: "STRATEGY CREATIVITY EXECUTION REAL IMPACT", slug: "gac-motors", span: "col-span-1 row-span-2" },
+  { img: gacGs4, caption: "PEOPLE BRANDS COMMUNITIES FOR A BOLDER TOMORROW", slug: "gac-gs4-launch", span: "col-span-1 md:col-span-2 row-span-1" },
+];
+
+// Consistent masonry pattern sequence for items
+const gridSpanPattern = [
+  "col-span-1 md:col-span-2 row-span-2",
+  "col-span-1 row-span-1",
+  "col-span-1 row-span-1",
+  "col-span-1 md:col-span-2 row-span-1",
+  "col-span-1 row-span-2",
+  "col-span-1 md:col-span-2 row-span-1",
 ];
 
 const PortfolioSection = () => {
+  const { data: serverPortfolios } = usePortfoliosQuery();
+
+  const items: PortfolioDisplayItem[] =
+    serverPortfolios && serverPortfolios.length > 0
+      ? serverPortfolios.slice(0, 6).map((item, index) => {
+        const coverImage = getStrapiMedia(item.cover_image?.url);
+        const slug = item.slug || "";
+
+        let fallbackImg = woleSoyinka;
+        if (slug.includes("man")) fallbackImg = manEvent;
+        else if (slug.includes("isdb") || slug.includes("islamic")) fallbackImg = isdbEvent;
+        else if (slug.includes("lontor")) fallbackImg = lontorPays;
+        else if (slug.includes("gac-motors")) fallbackImg = gacMotors;
+        else if (slug.includes("gac-gs4")) fallbackImg = gacGs4;
+
+        return {
+          img: coverImage || fallbackImg,
+          caption: item.title,
+          slug: slug,
+          span: gridSpanPattern[index % gridSpanPattern.length],
+        };
+      })
+      : defaultPortfolioItems;
+
   return (
     <section id="portfolio" className="py-24 lg:py-36 bg-[#0A0A0A] text-white relative border-b border-neutral-800">
       <div className="container mx-auto px-6 md:px-12 relative">
@@ -64,27 +95,41 @@ const PortfolioSection = () => {
 
           {/* Masonry / Photo Collage Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[220px]">
-            {portfolioItems.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.04 }}
-                className={`group relative overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 ${item.span}`}
-              >
-                <img
-                  src={item.img}
-                  alt={item.caption}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="font-heading text-lg font-bold text-white uppercase tracking-wider">
-                    {item.caption}
-                  </span>
+            {items.map((item, index) => {
+              const cardContent = (
+                <div className="relative w-full h-full">
+                  <img
+                    src={item.img}
+                    alt={item.caption}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <span className="font-heading text-lg font-bold text-white uppercase tracking-wider">
+                      {item.caption}
+                    </span>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              );
+
+              return (
+                <motion.div
+                  key={item.slug || index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.04 }}
+                  className={`group relative overflow-hidden rounded-xl bg-neutral-900 border border-neutral-800 ${item.span}`}
+                >
+                  {item.slug ? (
+                    <Link to={`/work/${item.slug}`} className="block w-full h-full">
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    cardContent
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Load More Button */}
