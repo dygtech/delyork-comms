@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
-import { BACKEND_URL } from "@/services/api";
+import { getStrapiMedia } from "@/services/api";
 import { useLatestPostsQuery, usePostsQuery } from "@/services/queries";
 
 const defaultPosts = [
@@ -46,9 +46,7 @@ const BlogSection = () => {
 
   // Map helper for Strapi items
   const mapPost = (item: any, idx: number) => {
-    const coverImage = item.featured_image?.url
-      ? `${BACKEND_URL}${item.featured_image.url}`
-      : null;
+    const coverImage = getStrapiMedia(item.featured_image?.url);
 
     const categoryName = item.categories && item.categories.length > 0
       ? item.categories[0].name

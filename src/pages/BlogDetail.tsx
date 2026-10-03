@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Asterisk, Calendar, Folder, BookOpen, MessageSquare } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostBySlugQuery, usePostsQuery, queryKeys } from "@/services/queries";
-import { BACKEND_URL, createComment } from "@/services/api";
+import { BACKEND_URL, getStrapiMedia, createComment } from "@/services/api";
 import Navbar from "@/components/Navbar";
 
 import blog1 from "@/assets/blog-1.jpg";
@@ -96,9 +96,7 @@ const BlogDetail = () => {
       })
     : fallback.date;
 
-  const coverImage = serverPost?.featured_image?.url
-    ? `${BACKEND_URL}${serverPost.featured_image.url}`
-    : fallback.img;
+  const coverImage = getStrapiMedia(serverPost?.featured_image?.url) || fallback.img;
 
   const contentHtml = serverPost?.content || fallback.content;
 

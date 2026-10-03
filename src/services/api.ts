@@ -1,5 +1,19 @@
 export const BACKEND_URL = import.meta.env.VITE_API_URL || "https://delyork-comms-backend-h7ccu.ondigitalocean.app";
 
+/**
+ * Normalizes media URLs returned from Strapi.
+ * When uploads are hosted on an external provider (like DigitalOcean Spaces / S3 / CDN),
+ * url is already absolute (starts with http:// or https://).
+ * For local uploads, Strapi returns a relative path (starts with /uploads/...).
+ */
+export function getStrapiMedia(url?: string | null): string | null {
+  if (!url) return null;
+  if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//")) {
+    return url;
+  }
+  return `${BACKEND_URL}${url.startsWith("/") ? "" : "/"}${url}`;
+}
+
 export interface StrapiPortfolio {
   id: number;
   documentId: string;

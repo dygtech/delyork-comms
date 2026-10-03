@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { usePortfoliosQuery } from "@/services/queries";
-import { BACKEND_URL } from "@/services/api";
+import { getStrapiMedia } from "@/services/api";
 
 import wole_soyinka from "@/assets/wole-soyinka.jpg";
 import man_event from "@/assets/man-event.jpg";
@@ -72,7 +72,7 @@ const WorksList = () => {
 
   const projects = serverPortfolios && serverPortfolios.length > 0
     ? serverPortfolios.map((item) => {
-      const coverImage = item.cover_image?.url ? `${BACKEND_URL}${item.cover_image.url}` : null;
+      const coverImage = getStrapiMedia(item.cover_image?.url);
       const categoryName = item.capabilities && item.capabilities.length > 0 ? item.capabilities[0].name : "Creative Strategy";
       let fallbackImg = wole_soyinka;
       const slug = item.slug || "";

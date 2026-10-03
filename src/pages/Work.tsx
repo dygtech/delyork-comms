@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Asterisk, Calendar, Users, Briefcase } from "lucide-react";
 import { usePortfolioBySlugQuery, usePortfoliosQuery } from "@/services/queries";
-import { BACKEND_URL } from "@/services/api";
+import { getStrapiMedia } from "@/services/api";
 import Navbar from "@/components/Navbar";
 
 import wole_soyinka from "@/assets/wole-soyinka.jpg";
@@ -121,9 +121,7 @@ const Work = () => {
   const overview = serverPortfolio?.overview || fallback.overview;
   const team = serverPortfolio?.team || fallback.team;
   
-  const coverImage = serverPortfolio?.cover_image?.url
-    ? `${BACKEND_URL}${serverPortfolio.cover_image.url}`
-    : fallback.img;
+  const coverImage = getStrapiMedia(serverPortfolio?.cover_image?.url) || fallback.img;
 
   const contentHtml = serverPortfolio?.content || fallback.content;
 
