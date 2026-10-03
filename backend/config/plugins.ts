@@ -6,7 +6,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
     config: {
       provider: 'aws-s3',
       providerOptions: {
-        baseUrl: `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.digitaloceanspaces.com`,
+        baseUrl: `https://${env('DO_SPACE_BUCKET')}.${env('DO_SPACE_REGION')}.cdn.digitaloceanspaces.com`,
         s3Options: {
           credentials: {
             accessKeyId: env('DO_SPACE_ACCESS_KEY'),

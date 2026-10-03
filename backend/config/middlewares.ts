@@ -16,6 +16,7 @@ const config: Core.Config.Middlewares = [
             'blob:',
             '*.digitaloceanspaces.com',
             '*.lon1.digitaloceanspaces.com',
+            '*.lon1.cdn.digitaloceanspaces.com',
           ],
           'media-src': [
             "'self'",
@@ -23,6 +24,7 @@ const config: Core.Config.Middlewares = [
             'blob:',
             '*.digitaloceanspaces.com',
             '*.lon1.digitaloceanspaces.com',
+            '*.lon1.cdn.digitaloceanspaces.com',
           ],
           upgradeInsecureRequests: null,
         },
