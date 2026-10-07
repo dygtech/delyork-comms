@@ -322,7 +322,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York PR & Strategic Events Team",
         capabilities: ["communications", "event-management"],
         imageFile: "wole-soyinka.jpg",
-        content: `<h2>Celebrating the Legacy of a Giant</h2><p>Our team delivered a masterfully executed communications campaign and luxury event to mark the 90th birthday celebration of Nobel Laureate, Professor Wole Soyinka.</p><h3>Scope of Work</h3><ul><li>Strategic Public Relations and Media Coordination</li><li>High-end VIP Event Production and Stage Design</li><li>Comprehensive Media Coverage and Live-Streaming Integration</li></ul><p>The campaign captured the nation's heart, bringing together dignitaries, artists, and global citizens to honor his immense contribution to world literature and democratic ideals.</p>`
+        content: `<h2>Celebrating the Legacy of a Giant</h2><p>Our team delivered a masterfully executed communications campaign and luxury event to mark the 90th birthday celebration of Nobel Laureate, Professor Wole Soyinka.</p><h3>Scope of Work</h3><ul><li>Strategic Public Relations and Media Coordination</li><li>High-end VIP Event Production and Stage Design</li><li>Comprehensive Media Coverage and Live-Streaming Integration</li></ul><p>The campaign captured the nation's heart, bringing together dignitaries, artists, and global citizens to honor his immense contribution to world literature and democratic ideals.</p>`,
+        sort_order: 1,
+        is_featured: true,
+        featured_tag: "BRAND CAMPAIGN"
       },
       {
         title: "Manufacturers Association of Nigeria",
@@ -332,7 +335,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York Corporate Communications Division",
         capabilities: ["event-management", "communications"],
         imageFile: "man-event.jpg",
-        content: `<h2>Advocating for African Industrialization</h2><p>Del-York proudly managed the end-to-end corporate communications and industrial exhibition for the Manufacturers Association of Nigeria (MAN).</p><h3>Core Accomplishments</h3><ul><li>Facilitated government relations and policy roundtables</li><li>Designed and engineered high-capacity interactive exhibition pavilions</li><li>Secured first-tier media placements and corporate features</li></ul>`
+        content: `<h2>Advocating for African Industrialization</h2><p>Del-York proudly managed the end-to-end corporate communications and industrial exhibition for the Manufacturers Association of Nigeria (MAN).</p><h3>Core Accomplishments</h3><ul><li>Facilitated government relations and policy roundtables</li><li>Designed and engineered high-capacity interactive exhibition pavilions</li><li>Secured first-tier media placements and corporate features</li></ul>`,
+        sort_order: 2,
+        is_featured: true,
+        featured_tag: "FILM PRODUCTION"
       },
       {
         title: "Islamic Development Bank Group (IsDB Group)",
@@ -342,7 +348,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York Global Partnerships Team",
         capabilities: ["campaign"],
         imageFile: "isdb-event.jpg",
-        content: `<h2>Promoting Social Stature & Infrastructure</h2><p>We designed and executed a multi-channel developmental campaign for the Islamic Development Bank Group across diverse African regions.</p>`
+        content: `<h2>Promoting Social Stature & Infrastructure</h2><p>We designed and executed a multi-channel developmental campaign for the Islamic Development Bank Group across diverse African regions.</p>`,
+        sort_order: 4,
+        is_featured: true,
+        featured_tag: "STORYTELLING"
       },
       {
         title: "Lontorpays",
@@ -352,7 +361,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York Digital Products Team",
         capabilities: ["web-and-mobile"],
         imageFile: "lontorpays.jpg",
-        content: `<h2>A Seamless Digital Fintech Stature</h2><p>Crafting a modern and accessible visual user interface for the Lontorpays fintech product, prioritizing usability, safety, and modern design semantics.</p>`
+        content: `<h2>A Seamless Digital Fintech Stature</h2><p>Crafting a modern and accessible visual user interface for the Lontorpays fintech product, prioritizing usability, safety, and modern design semantics.</p>`,
+        sort_order: 5,
+        is_featured: false,
+        featured_tag: "DIGITAL"
       },
       {
         title: "GAC Motors",
@@ -362,7 +374,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York Brand Design Studio",
         capabilities: ["print", "campaign"],
         imageFile: "gac-motors.jpg",
-        content: `<h2>Automotive Elegance Refined</h2><p>We produced an elite artistic print catalog and billboard advertising campaign to position GAC Motors as the premier luxury automotive choice in Nigeria.</p>`
+        content: `<h2>Automotive Elegance Refined</h2><p>We produced an elite artistic print catalog and billboard advertising campaign to position GAC Motors as the premier luxury automotive choice in Nigeria.</p>`,
+        sort_order: 3,
+        is_featured: true,
+        featured_tag: "PRODUCT STORY"
       },
       {
         title: "GAC GS4 Launch",
@@ -372,7 +387,10 @@ async function runMigration(strapi: Core.Strapi) {
         team: "Del-York Film & Broadcast Production Division",
         capabilities: ["media-and-film", "campaign"],
         imageFile: "gac-gs4.jpg",
-        content: `<h2>Igniting the Drive for Innovation</h2><p>Our media and broadcast team directed the high-concept digital and cinematic television commercial launch for the GAC GS4 SUV, achieving over 10 million combined brand impressions.</p>`
+        content: `<h2>Igniting the Drive for Innovation</h2><p>Our media and broadcast team directed the high-concept digital and cinematic television commercial launch for the GAC GS4 SUV, achieving over 10 million combined brand impressions.</p>`,
+        sort_order: 6,
+        is_featured: false,
+        featured_tag: "CAMPAIGN"
       }
     ];
 
@@ -385,7 +403,16 @@ async function runMigration(strapi: Core.Strapi) {
       });
 
       if (existing && existing.length > 0) {
-        console.log(`✔ Portfolio project "${project.title}" already exists (Strapi ID: ${existing[0].id}).`);
+        console.log(`✔ Portfolio project "${project.title}" already exists (Strapi ID: ${existing[0].id}). Updating with new fields.`);
+        await strapi.documents('api::portfolio.portfolio').update({
+          documentId: existing[0].documentId,
+          data: {
+            sort_order: project.sort_order,
+            is_featured: project.is_featured,
+            featured_tag: project.featured_tag,
+          } as any,
+          status: 'published',
+        });
       } else {
         // Upload cover image
         let coverImageId: number | null = null;
@@ -433,7 +460,10 @@ async function runMigration(strapi: Core.Strapi) {
             cover_image: coverImageId,
             capabilities: capIds,
             content: project.content,
-          },
+            sort_order: project.sort_order,
+            is_featured: project.is_featured,
+            featured_tag: project.featured_tag,
+          } as any,
           status: 'published',
         });
 

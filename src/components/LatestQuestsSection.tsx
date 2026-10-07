@@ -1,13 +1,23 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useFeaturedPortfoliosQuery } from "@/services/queries";
+import { getStrapiMedia } from "@/services/api";
 
 import questBrighterTomorrow from "@/assets/redesign/quest_brighter_tomorrow.jpg";
 import questPeopleInMotion from "@/assets/redesign/quest_people_in_motion.jpg";
 import questBuiltForMore from "@/assets/redesign/quest_built_for_more.jpg";
 import questRootedInPeople from "@/assets/redesign/quest_rooted_in_people.jpg";
 
-const quests = [
+interface QuestItem {
+  id: string;
+  tag: string;
+  title: string;
+  image: string;
+  link: string;
+}
+
+const defaultQuests: QuestItem[] = [
   {
     id: "brighter-tomorrow",
     tag: "BRAND CAMPAIGN",
@@ -39,6 +49,20 @@ const quests = [
 ];
 
 const LatestQuestsSection = () => {
+  const { data: featuredPortfolios } = useFeaturedPortfoliosQuery();
+
+  // Use featured portfolios from backend if available, otherwise fall back to hardcoded defaults
+  const quests: QuestItem[] =
+    featuredPortfolios && featuredPortfolios.length > 0
+      ? featuredPortfolios.map((item) => ({
+          id: item.slug || item.documentId,
+          tag: item.featured_tag || item.capabilities?.[0]?.name?.toUpperCase() || "FEATURED",
+          title: item.title.toUpperCase(),
+          image: getStrapiMedia(item.cover_image?.url) || questBrighterTomorrow,
+          link: `/works/${item.slug}`,
+        }))
+      : defaultQuests;
+
   return (
     <section className="py-20 lg:py-32 bg-[#0C0C0C] text-white border-b border-neutral-800">
       <div className="container mx-auto px-6 md:px-12">

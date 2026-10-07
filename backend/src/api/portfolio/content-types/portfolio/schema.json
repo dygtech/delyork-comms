@@ -51,6 +51,17 @@
       "options": {
         "preset": "defaultHtml"
       }
+    },
+    "sort_order": {
+      "type": "integer",
+      "default": 0
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "featured_tag": {
+      "type": "string"
     }
   }
 }

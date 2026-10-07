@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPortfolios, getLatestPosts, getPortfolioBySlug, getPosts, getPostBySlug, getJobListings } from "./api";
+import { getPortfolios, getLatestPosts, getPortfolioBySlug, getPosts, getPostBySlug, getJobListings, getFeaturedPortfolios } from "./api";
 
 export const queryKeys = {
   portfolios: ["portfolios"] as const,
+  featuredPortfolios: ["portfolios", "featured"] as const,
   portfolioBySlug: (slug: string) => ["portfolio", slug] as const,
   latestPosts: (limit: number) => ["posts", "latest", limit] as const,
   posts: ["posts"] as const,
@@ -17,6 +18,17 @@ export function usePortfoliosQuery() {
   return useQuery({
     queryKey: queryKeys.portfolios,
     queryFn: () => getPortfolios(),
+    staleTime: 1000 * 60 * 5, // 5 minutes cache validity
+  });
+}
+
+/**
+ * React Query hook to get featured portfolios for the "Latest Quests" section
+ */
+export function useFeaturedPortfoliosQuery() {
+  return useQuery({
+    queryKey: queryKeys.featuredPortfolios,
+    queryFn: () => getFeaturedPortfolios(),
     staleTime: 1000 * 60 * 5, // 5 minutes cache validity
   });
 }

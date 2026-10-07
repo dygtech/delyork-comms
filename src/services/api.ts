@@ -31,6 +31,9 @@ export interface StrapiPortfolio {
     name: string;
     slug: string;
   }>;
+  sort_order?: number;
+  is_featured?: boolean;
+  featured_tag?: string;
 }
 
 export interface StrapiComment {
@@ -88,9 +91,21 @@ export interface StrapiApplication {
  * Fetch all portfolios from Strapi
  */
 export async function getPortfolios(): Promise<StrapiPortfolio[]> {
-  const res = await fetch(`${BACKEND_URL}/api/portfolios?populate=*`);
+  const res = await fetch(`${BACKEND_URL}/api/portfolios?populate=*&sort=sort_order:asc`);
   if (!res.ok) {
     throw new Error(`Failed to fetch portfolios: ${res.statusText}`);
+  }
+  const json = await res.json();
+  return json.data || [];
+}
+
+/**
+ * Fetch portfolios marked as featured (for the "Latest Quests" section)
+ */
+export async function getFeaturedPortfolios(): Promise<StrapiPortfolio[]> {
+  const res = await fetch(`${BACKEND_URL}/api/portfolios?populate=*&filters[is_featured][$eq]=true&sort=sort_order:asc`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch featured portfolios: ${res.statusText}`);
   }
   const json = await res.json();
   return json.data || [];
