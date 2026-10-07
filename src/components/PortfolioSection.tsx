@@ -23,7 +23,7 @@ const defaultPortfolioItems: PortfolioDisplayItem[] = [
   { img: isdbEvent, caption: "IDEAS PEOPLE CULTURE CHANGE", slug: "islamic-development-bank-annual-meeting", span: "col-span-1 row-span-1" },
   { img: lontorPays, caption: "LONTORPAYS FINTECH", slug: "lontor-pays", span: "col-span-1 md:col-span-2 row-span-1" },
   { img: gacMotors, caption: "STRATEGY CREATIVITY EXECUTION REAL IMPACT", slug: "gac-motors", span: "col-span-1 row-span-2" },
-  { img: gacGs4, caption: "PEOPLE BRANDS COMMUNITIES FOR A BOLDER TOMORROW", slug: "gac-gs4-launch", span: "col-span-1 md:col-span-2 row-span-1" },
+  { img: gacGs4, caption: "PEOPLE BRANDS COMMUNITIES FOR A BOLDER TOMORROW", slug: "gac-gs4-launch", span: "col-span-1 md:col-span-2 lg:col-span-3 row-span-2" },
 ];
 
 // Consistent masonry pattern sequence for items
@@ -33,32 +33,54 @@ const gridSpanPattern = [
   "col-span-1 row-span-1",
   "col-span-1 md:col-span-2 row-span-1",
   "col-span-1 row-span-2",
-  "col-span-1 md:col-span-2 row-span-1",
+  "col-span-1 md:col-span-2 lg:col-span-3 row-span-2",
 ];
+
+// Adjusts spans for partial cycles to prevent bottom gaps in the grid
+const getAdjustedSpan = (index: number, totalItems: number): string => {
+  const cycleLength = gridSpanPattern.length;
+  const patternIndex = index % cycleLength;
+  const cycleStart = Math.floor(index / cycleLength) * cycleLength;
+  const itemsInCycle = Math.min(cycleLength, totalItems - cycleStart);
+
+  let span = gridSpanPattern[patternIndex];
+
+  // In partial cycles with 3 or fewer items, flatten row-span-2 to row-span-1
+  // so the remaining items pack into a single row without leaving bottom gaps
+  if (itemsInCycle < cycleLength && index >= cycleLength && itemsInCycle <= 3) {
+    span = span.replace('row-span-2', 'row-span-1');
+  }
+
+  return span;
+};
 
 const PortfolioSection = () => {
   const { data: serverPortfolios } = usePortfoliosQuery();
 
   const items: PortfolioDisplayItem[] =
     serverPortfolios && serverPortfolios.length > 0
-      ? serverPortfolios.slice(0, 6).map((item, index) => {
-        const coverImage = getStrapiMedia(item.cover_image?.url);
-        const slug = item.slug || "";
+      ? (() => {
+        const sliced = serverPortfolios.slice(0, 10);
+        const total = sliced.length;
+        return sliced.map((item, index) => {
+          const coverImage = getStrapiMedia(item.cover_image?.url);
+          const slug = item.slug || "";
 
-        let fallbackImg = woleSoyinka;
-        if (slug.includes("man")) fallbackImg = manEvent;
-        else if (slug.includes("isdb") || slug.includes("islamic")) fallbackImg = isdbEvent;
-        else if (slug.includes("lontor")) fallbackImg = lontorPays;
-        else if (slug.includes("gac-motors")) fallbackImg = gacMotors;
-        else if (slug.includes("gac-gs4")) fallbackImg = gacGs4;
+          let fallbackImg = woleSoyinka;
+          if (slug.includes("man")) fallbackImg = manEvent;
+          else if (slug.includes("isdb") || slug.includes("islamic")) fallbackImg = isdbEvent;
+          else if (slug.includes("lontor")) fallbackImg = lontorPays;
+          else if (slug.includes("gac-motors")) fallbackImg = gacMotors;
+          else if (slug.includes("gac-gs4")) fallbackImg = gacGs4;
 
-        return {
-          img: coverImage || fallbackImg,
-          caption: item.title,
-          slug: slug,
-          span: gridSpanPattern[index % gridSpanPattern.length],
-        };
-      })
+          return {
+            img: coverImage || fallbackImg,
+            caption: item.title,
+            slug: slug,
+            span: getAdjustedSpan(index, total),
+          };
+        });
+      })()
       : defaultPortfolioItems;
 
   return (
@@ -94,7 +116,7 @@ const PortfolioSection = () => {
           </div>
 
           {/* Masonry / Photo Collage Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[220px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[220px] grid-flow-dense">
             {items.map((item, index) => {
               const cardContent = (
                 <div className="relative w-full h-full">
