@@ -23,28 +23,28 @@ const defaultQuests: QuestItem[] = [
     tag: "BRAND CAMPAIGN",
     title: "A BRIGHTER TOMORROW",
     image: questBrighterTomorrow,
-    link: "/works/wole-soyinka-at-90",
+    link: "/work/wole-soyinka-at-90",
   },
   {
     id: "people-in-motion",
     tag: "FILM PRODUCTION",
     title: "PEOPLE IN MOTION",
     image: questPeopleInMotion,
-    link: "/works/manufacturers-association-of-nigeria",
+    link: "/work/manufacturers-association-of-nigeria",
   },
   {
     id: "built-for-more",
     tag: "PRODUCT STORY",
     title: "BUILT FOR MORE",
     image: questBuiltForMore,
-    link: "/works/gac-motors",
+    link: "/work/gac-motors",
   },
   {
     id: "rooted-in-people",
     tag: "STORYTELLING",
     title: "ROOTED IN PEOPLE",
     image: questRootedInPeople,
-    link: "/works/islamic-development-bank-group",
+    link: "/work/islamic-development-bank-group",
   },
 ];
 
@@ -55,12 +55,12 @@ const LatestQuestsSection = () => {
   const quests: QuestItem[] =
     featuredPortfolios && featuredPortfolios.length > 0
       ? featuredPortfolios.map((item) => ({
-          id: item.slug || item.documentId,
-          tag: item.featured_tag || item.capabilities?.[0]?.name?.toUpperCase() || "FEATURED",
-          title: item.title.toUpperCase(),
-          image: getStrapiMedia(item.cover_image?.url) || questBrighterTomorrow,
-          link: `/works/${item.slug}`,
-        }))
+        id: item.slug || item.documentId,
+        tag: item.featured_tag || item.capabilities?.[0]?.name?.toUpperCase() || "FEATURED",
+        title: item.title.toUpperCase(),
+        image: getStrapiMedia(item.cover_image?.url) || questBrighterTomorrow,
+        link: `/work/${item.slug}`,
+      }))
       : defaultQuests;
 
   return (
